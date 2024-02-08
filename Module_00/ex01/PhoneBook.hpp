@@ -22,12 +22,13 @@
 class PhoneBook
 {
 public: /* ************************* [v] PUBLIC [v] ************************* */
-	PhoneBook();
-	~PhoneBook();
+	PhoneBook(void);
+	~PhoneBook(void);
 	void	addContact(void);
 	void	printContacts(void) const;
-	void	search(void) const;
+	void	search(void);
 	void	welcome(void) const;
+	bool	stdio_error; /* DON'T ASK ME WHY TF IS IT HERE */
 /* ***************************** [^] PUBLIC [^] ***************************** */
 
 private: /* ************************ [v] PRIVATE [v] ************************ */

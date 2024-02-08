@@ -28,10 +28,10 @@ using std::endl;
 /* ***************************** [^] USING [^] ****************************** */
 
 int
-	main(int argc, char **argv)
+	main(register int argc, const char **const argv)
 {
-	auto	strIndex = 1;
-	auto	charIndex = 0;
+	register int	strIndex;
+	register int	charIndex;
 
 	if (argc == 1)
 		cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";

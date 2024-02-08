@@ -17,6 +17,7 @@
 	# [EXE]
 		MAIN_EXE	=	"megaphone"
 		MAIN		=	./megaphone.cpp
+		MAIN_EXIST	=	$(eval MAIN_EXIST := $$(MAIN:.cpp=.o))$(MAIN_EXIST)
 	# [EXE]
 	# [COMPILER FLAGS]
 		CFLAGS		=	-Wall -Wextra -Werror -std=c++98
@@ -31,9 +32,10 @@
 	B2F15	=	$(shell tput setab 2)$(shell tput setaf 15)
 # ****************************** [^] COLORS [^] ****************************** #
 
-all: $(MAIN_EXE)
+all: $(MAIN_EXIST)
 
-$(MAIN_EXE):
+$(MAIN_EXIST):
+	@$(CC) -c $(MAIN) -o $(MAIN_EXIST)
 	@$(CC) $(CFLAGS) $(MAIN) -o "./$(MAIN_EXE)" && \
 		echo "\n\n $(C_BLINK)$(B2F15) $(MAIN_EXE) is ready! $(C_RESET)\n"
 
@@ -42,7 +44,8 @@ clear: fclean
 clean: fclean
 
 fc: fclean
-fclean: clean
+fclean:
+	@rm $(MAIN_EXIST) 2>/dev/null
 	@rm $(MAIN_EXE) 2>/dev/null && \
 		echo "\n $(B1F11) $(MAIN_EXE) $(F15)deleted! $(C_RESET)\n" || \
 		echo "\n $(B12F15) $(MAIN_EXE) is not exist already! $(C_RESET)\n"

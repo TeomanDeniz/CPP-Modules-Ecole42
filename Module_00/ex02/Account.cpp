@@ -34,8 +34,8 @@ using std::endl;
 /* ***************************** [^] USING [^] ****************************** */
 
 int	Account::_nbAccounts = 0;
-int	Account::_totalAmount= 0;
-int	Account::_totalNbDeposits= 0;
+int	Account::_totalAmount = 0;
+int	Account::_totalNbDeposits = 0;
 int	Account::_totalNbWithdrawals = 0;
 
 /******************************************************************************\
@@ -54,11 +54,11 @@ void
 	cout << std::setfill('0') << "[" \
 		<< 1900 + std::localtime(&result)->tm_year \
 		<< std::setw(2) << 1 + std::localtime(&result)->tm_mon \
-		<<  std::setw(2) << std::localtime(&result)->tm_mday \
-		<<  "_" \
-		<<  std::setw(2) << std::localtime(&result)->tm_hour \
-		<<  std::setw(2) << std::localtime(&result)->tm_min \
-		<<  std::setw(2) << std::localtime(&result)->tm_sec \
+		<< std::setw(2) << std::localtime(&result)->tm_mday \
+		<< "_" \
+		<< std::setw(2) << std::localtime(&result)->tm_hour \
+		<< std::setw(2) << std::localtime(&result)->tm_min \
+		<< std::setw(2) << std::localtime(&result)->tm_sec \
 		<< "] " << flush;
 }
 
@@ -121,9 +121,8 @@ void
 		<< "withdrawals:" << getNbWithdrawals() << endl;
 }
 
-// Accessing account detail private info
 void
-	Account::makeDeposit(int deposit)
+	Account::makeDeposit(int deposit) /* ACCESSING ACCOUNT DETAIL PRIVATE INFO */
 {
 	this->_displayTimestamp();
 	++_nbDeposits;

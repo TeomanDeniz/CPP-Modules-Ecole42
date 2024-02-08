@@ -26,12 +26,13 @@ using std::string;
 class Contact
 {
 public: /* ************************* [v] PUBLIC [v] ************************* */
-	Contact();
-	~Contact();
+	Contact(void);
+	~Contact(void);
 	void	init(void);
 	void	view(int index) const;
 	void	display(int index) const;
 	void	setIndex(int index);
+	bool	error;
 /* ***************************** [^] PUBLIC [^] ***************************** */
 
 private: /* ************************ [v] PRIVATE [v] ************************ */

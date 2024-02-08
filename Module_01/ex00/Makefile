@@ -23,6 +23,7 @@ MAIN_SRC	=	./newZombie.cpp \
 	# [EXE]
 		MAIN_EXE	=	"Zombie"
 		MAIN		=	./main.cpp
+		MAIN_EXIST	=	$(eval MAIN_EXIST := $$(MAIN:.cpp=.o))$(MAIN_EXIST)
 	# [EXE]
 	# [COMPILER FLAGS]
 		CFLAGS		=	-Wall -Wextra -Werror -std=c++98
@@ -42,12 +43,13 @@ MAIN_SRC	=	./newZombie.cpp \
 # ****************************** [^] COLORS [^] ****************************** #
 
 %.o: %.cpp
-	@rm -f $(MAIN_EXE) 2>/dev/null
+	@rm -f $(MAIN_EXIST) 2>/dev/null
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-all: $(MAIN_EXE)
+all: $(MAIN_EXIST)
 
-$(MAIN_EXE): $(MAIN_OBJ)
+$(MAIN_EXIST): $(MAIN_OBJ)
+	@$(CC) -c $(MAIN) -o $(MAIN_EXIST)
 	@$(CC) $(CFLAGS) $(MAIN) $(MAIN_OBJ) -o "./$(MAIN_EXE)" && \
 		echo "\n\n $(C_BLINK)$(B2F15) $(MAIN_EXE) is ready! $(C_RESET)\n"
 
@@ -60,6 +62,7 @@ clean:
 
 fc: fclean
 fclean: clean
+	@rm $(MAIN_EXIST) 2>/dev/null
 	@rm $(MAIN_EXE) 2>/dev/null && \
 		echo "\n $(B1F11) $(MAIN_EXE) $(F15)deleted! $(C_RESET)\n" || \
 		echo "\n $(B12F15) $(MAIN_EXE) is not exist already! $(C_RESET)\n"

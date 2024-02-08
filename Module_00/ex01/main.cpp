@@ -20,6 +20,10 @@
 #include <cstdlib> /*
 # define EXIT_SUCCESS;
 #*/
+#include <string> /*
+#  class string;
+#istream &std::getline(istream&, string&);
+#*/
 /* **************************** [^] INCLUDES [^] **************************** */
 
 /* ***************************** [v] USING [v] ****************************** */
@@ -29,24 +33,41 @@ using std::flush;
 using std::string;
 /* ***************************** [^] USING [^] ****************************** */
 
+static void
+	toLowercase(string &stringArg)
+{
+	register int	ecx;
+
+	if (stringArg.empty())
+		return ;
+	for (ecx = 0; !!stringArg[ecx]; ecx++)
+		if (stringArg[ecx] >= 'A' && stringArg[ecx] <= 'Z')
+			stringArg[ecx] += 'a' - 'A';
+}
+
 int
 	main(void)
 {
 	PhoneBook	book;
-	string		input = "";
+	string		input;
 
+	book.stdio_error = false;
 	book.welcome();
-	while (input.compare("EXIT"))
-	{
-		if (input.compare("ADD") == 0)
+	loop:
+		cout << "> " << flush;
+		std::getline(cin, input);
+		toLowercase(input);
+		if (!input.compare("add"))
 			book.addContact();
-		else if (input.compare("SEARCH") == 0)
+		else if (!input.compare("search"))
 		{
 			book.printContacts();
 			book.search();
 		}
-		cout << "> " << flush;
-		cin >> input;
-	}
+		if (!input.compare("exit") || (!std::cin.good() && input.empty()) || \
+			book.stdio_error)
+			goto exit;
+	goto loop;
+	exit:
 	return (EXIT_SUCCESS);
 }

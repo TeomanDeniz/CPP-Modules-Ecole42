@@ -61,6 +61,7 @@ string
 		{
 			std::cin.clear();
 			cout << "Invalid input; please try again." << endl;
+			return ("");
 		}
 	} while (!valid);
 	return (input);
@@ -69,12 +70,27 @@ string
 void
 	Contact::init(void)
 {
-	std::cin.ignore();
 	this->_firstName = this->_getInput("Please enter you first name: ");
+	if (this->_firstName.empty())
+		goto label_error;
 	this->_lastName = this->_getInput("Please enter your last name: ");
+	if (this->_lastName.empty())
+		goto label_error;
 	this->_nickname = this->_getInput("Please enter your nickname: ");
-	this->_nickname = this->_getInput("Please enter your phone number: ");
-	this->_nickname = this->_getInput("Please enter your darkest secret: ");
+	if (this->_nickname.empty())
+		goto label_error;
+	this->_phoneNumber = this->_getInput("Please enter your phone number: ");
+	if (this->_phoneNumber.empty())
+		goto label_error;
+	this->_darkestSecret = \
+		this->_getInput("Please enter your darkest secret: ");
+	if (this->_darkestSecret.empty())
+		goto label_error;
+	goto end;
+	label_error:
+	this->error = true;
+	return ;
+	end:
 	cout << endl;
 }
 
@@ -118,5 +134,7 @@ void
 	cout << "First Name:\t" << this->_firstName << endl;
 	cout << "Last Name:\t" << this->_lastName << endl;
 	cout << "Nickname:\t" << this->_nickname << endl;
+	cout << "Number:\t\t" << this->_phoneNumber << endl;
+	cout << "Darkest Secret:\t" << this->_darkestSecret << endl;
 	cout << endl;
 }
