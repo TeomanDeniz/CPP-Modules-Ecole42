@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   Weapon.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdeniz <Discord:@teomandeniz>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,37 +10,40 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ZOMBIE_HPP
-# define ZOMBIE_HPP 202402
-
 /* **************************** [v] INCLUDES [v] **************************** */
-# include <iostream> /*
-# namespc std;
-# */
-# include <string> /*
-#   class string;
-# */
+#include "Weapon.hpp" /*
+#  class Weapon;
+#*/
+#include <iostream> /*
+#namespc std;
+#*/
+#include <string> /*
+#  class std::string;
+#*/
 /* **************************** [^] INCLUDES [^] **************************** */
 
 /* ***************************** [v] USING [v] ****************************** */
 using std::string;
 /* ***************************** [^] USING [^] ****************************** */
 
-class Zombie
+Weapon::Weapon(string type) /* CONSTRUCTOR */
 {
-public: /* ************************* [v] PUBLIC [v] ************************* */
-	Zombie(void);
-	~Zombie(void);
-	void	announce(void);
-	Zombie	*newZombie(string name);
-	void	setName(string name);
-/* ***************************** [^] PUBLIC [^] ***************************** */
+	this->setType(type);
+}
 
-private: /* ************************ [v] PRIVATE [v] ************************ */
-	string	_name;
-/* **************************** [^] PRIVATE [^] ***************************** */
-};
+Weapon::~Weapon(void) /* DESTRUCTOR */
+{
+	(void)0;
+}
 
-extern Zombie	*zombieHorde(int N, string name);
+const string
+	&Weapon::getType(void)
+{
+	return (this->type);
+}
 
-#endif /* ZOMBIE_HPP */
+void
+	Weapon::setType(string newType)
+{
+	this->type = newType;
+}

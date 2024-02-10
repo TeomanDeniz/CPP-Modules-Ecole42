@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   Harl.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdeniz <Discord:@teomandeniz>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,37 +10,36 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ZOMBIE_HPP
-# define ZOMBIE_HPP 202402
+#ifndef HARL_HPP
+# define HARL_HPP 202402
 
 /* **************************** [v] INCLUDES [v] **************************** */
-# include <iostream> /*
-# namespc std;
-# */
-# include <string> /*
-#   class string;
-# */
+#include <iostream> /*
+#namespc std;
+#*/
+#include <string> /*
+#  class std::string;
+#*/
 /* **************************** [^] INCLUDES [^] **************************** */
 
 /* ***************************** [v] USING [v] ****************************** */
 using std::string;
 /* ***************************** [^] USING [^] ****************************** */
 
-class Zombie
+class Harl
 {
+	void	complain(string level);
+
 public: /* ************************* [v] PUBLIC [v] ************************* */
-	Zombie(void);
-	~Zombie(void);
-	void	announce(void);
-	Zombie	*newZombie(string name);
-	void	setName(string name);
+	Harl(void);
+	~Harl(void);
 /* ***************************** [^] PUBLIC [^] ***************************** */
 
 private: /* ************************ [v] PRIVATE [v] ************************ */
-	string	_name;
+	void	debug(void);
+	void	info(void);
+	void	warning(void);
+	void	error(void);
 /* **************************** [^] PRIVATE [^] ***************************** */
 };
-
-extern Zombie	*zombieHorde(int N, string name);
-
-#endif /* ZOMBIE_HPP */
+#endif /* HARL_HPP */

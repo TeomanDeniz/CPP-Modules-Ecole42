@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdeniz <Discord:@teomandeniz>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,37 +10,34 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ZOMBIE_HPP
-# define ZOMBIE_HPP 202402
-
 /* **************************** [v] INCLUDES [v] **************************** */
-# include <iostream> /*
-# namespc std;
-# */
-# include <string> /*
-#   class string;
-# */
+#include "SedV2.hpp" /*
+#  class SedV2;
+#*/
+#include <cstdlib> /*
+# define EXIT_FAILURE;
+# define EXIT_SUCCESS;
+#*/
 /* **************************** [^] INCLUDES [^] **************************** */
 
 /* ***************************** [v] USING [v] ****************************** */
-using std::string;
+using std::cerr;
+using std::endl;
 /* ***************************** [^] USING [^] ****************************** */
 
-class Zombie
+int
+	main(register int argc, const char **const argv)
 {
-public: /* ************************* [v] PUBLIC [v] ************************* */
-	Zombie(void);
-	~Zombie(void);
-	void	announce(void);
-	Zombie	*newZombie(string name);
-	void	setName(string name);
-/* ***************************** [^] PUBLIC [^] ***************************** */
+	if (argc != 4)
+	{
+		cerr << ARG_ERROR_MESSAGE << endl;
+		return (EXIT_FAILURE);
+	}
+	else
+	{
+		SedV2	asdasdasd(argv[1]);
 
-private: /* ************************ [v] PRIVATE [v] ************************ */
-	string	_name;
-/* **************************** [^] PRIVATE [^] ***************************** */
-};
-
-extern Zombie	*zombieHorde(int N, string name);
-
-#endif /* ZOMBIE_HPP */
+		asdasdasd.replace(argv[2], argv[3]);
+	}
+	return (EXIT_SUCCESS);
+}

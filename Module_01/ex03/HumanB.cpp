@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   HumanB.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdeniz <Discord:@teomandeniz>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,37 +10,47 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ZOMBIE_HPP
-# define ZOMBIE_HPP 202402
-
 /* **************************** [v] INCLUDES [v] **************************** */
-# include <iostream> /*
-# namespc std;
-# */
-# include <string> /*
-#   class string;
-# */
+#include "HumanB.hpp" /*
+#  class HumanB;
+#*/
+#include <iostream> /*
+#namespc std;
+#*/
+#include <string> /*
+#  class std::string;
+#*/
 /* **************************** [^] INCLUDES [^] **************************** */
 
 /* ***************************** [v] USING [v] ****************************** */
+using std::cout;
 using std::string;
+using std::endl;
 /* ***************************** [^] USING [^] ****************************** */
 
-class Zombie
+HumanB::HumanB(string name) /* CONSTRUCTOR */ \
+	: _name(name)
 {
-public: /* ************************* [v] PUBLIC [v] ************************* */
-	Zombie(void);
-	~Zombie(void);
-	void	announce(void);
-	Zombie	*newZombie(string name);
-	void	setName(string name);
-/* ***************************** [^] PUBLIC [^] ***************************** */
+	this->_weapon = NULL;
+}
 
-private: /* ************************ [v] PRIVATE [v] ************************ */
-	string	_name;
-/* **************************** [^] PRIVATE [^] ***************************** */
-};
+HumanB::~HumanB(void) /* DESTRUCTOR */
+{
+	(void)0;
+}
 
-extern Zombie	*zombieHorde(int N, string name);
+void
+	HumanB::setWeapon(Weapon &weapon)
+{
+	this->_weapon = &weapon;
+}
 
-#endif /* ZOMBIE_HPP */
+void
+	HumanB::attack(void) const
+{
+	if (this->_weapon != NULL && this->_weapon->getType() != "")
+		cout << _name << " attacks with their " << \
+			this->_weapon->getType() << endl;
+	else
+		cout << _name << " doesn't have a weapon to attack." << endl;
+}

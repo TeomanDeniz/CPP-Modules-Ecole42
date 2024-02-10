@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   SedV2.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdeniz <Discord:@teomandeniz>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,15 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ZOMBIE_HPP
-# define ZOMBIE_HPP 202402
+#ifndef SEDV2_HPP
+# define SEDV2_HPP 202402
+
+# define ARG_ERROR_MESSAGE "Example: ./SedV2 [filename] [search] [replace]"
 
 /* **************************** [v] INCLUDES [v] **************************** */
 # include <iostream> /*
 # namespc std;
 # */
 # include <string> /*
-#   class string;
+#   class std::string;
 # */
 /* **************************** [^] INCLUDES [^] **************************** */
 
@@ -26,21 +28,19 @@
 using std::string;
 /* ***************************** [^] USING [^] ****************************** */
 
-class Zombie
+class SedV2
 {
+	void	replace(string s1, string s2);
+
 public: /* ************************* [v] PUBLIC [v] ************************* */
-	Zombie(void);
-	~Zombie(void);
-	void	announce(void);
-	Zombie	*newZombie(string name);
-	void	setName(string name);
+	SedV2(string filename);
+	~SedV2(void);
 /* ***************************** [^] PUBLIC [^] ***************************** */
 
 private: /* ************************ [v] PRIVATE [v] ************************ */
-	string	_name;
+	string _inFile;
+	string _outFile;
 /* **************************** [^] PRIVATE [^] ***************************** */
 };
 
-extern Zombie	*zombieHorde(int N, string name);
-
-#endif /* ZOMBIE_HPP */
+#endif /* SEDV2_HPP */

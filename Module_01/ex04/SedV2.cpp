@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   newZombie.cpp                                      :+:      :+:    :+:   */
+/*   SedV2.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdeniz <Discord:@teomandeniz>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,23 +11,80 @@
 /* ************************************************************************** */
 
 /* **************************** [v] INCLUDES [v] **************************** */
-#include "Zombie.hpp" /*
-#  class Zombie;
+#include "SedV2.hpp" /*
+#  class SedV2;
+#*/
+#include "Weapon.hpp" /*
+#  class Weapon;
 #*/
 #include <iostream> /*
 #namespc std;
 #*/
 #include <string> /*
 #  class std::string;
+#istream &std::getline(istream &, string &);
+#*/
+#include <cstdlib> /*
+# define EXIT_FAILURE;
+#*/
+#include <fstream> /*
+#typedef ifstream;
+#*/
+#include <fstream> /*
+#typedef ofstream;
+#*/
+#include <cstddef> /*
+#typedef std::size_t;
 #*/
 /* **************************** [^] INCLUDES [^] **************************** */
 
 /* ***************************** [v] USING [v] ****************************** */
+using std::cerr;
 using std::string;
+using std::endl;
 /* ***************************** [^] USING [^] ****************************** */
 
-Zombie
-	*newZombie(string name)
+SedV2::SedV2(string filename) /* CONSTRUCTOR */ \
+	: _inFile(filename)
 {
-	return (new Zombie(name));
+	this->_outFile = this->_inFile + ".replace";
+}
+
+SedV2::~SedV2(void) /* DESTRUCTOR */
+{
+	(void)0;
+}
+
+void
+	SedV2::replace(string toFind, string replace)
+{
+	std::ifstream	ifs(this->_inFile);
+
+	if (ifs.is_open())
+	{
+		string	content;
+
+		if (std::getline(ifs, content, '\0'))
+		{
+			std::ofstream	ofs(this->_outFile);
+			std::size_t		pos = content.find(toFind);
+
+			while (pos != string::npos)
+			{
+				content.erase(pos, toFind.length());
+				content.insert(pos, replace);
+				pos = content.find(toFind);
+			}
+			ofs << content;
+			ofs.close();
+		}
+		else
+			cerr << "Empty file found." << endl;
+		ifs.close();
+	}
+	else
+	{
+		cerr << "Unable to open the file." << endl;
+		exit(EXIT_FAILURE);
+	}
 }

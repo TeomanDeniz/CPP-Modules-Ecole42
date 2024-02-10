@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   Harl.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdeniz <Discord:@teomandeniz>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,11 +11,8 @@
 /* ************************************************************************** */
 
 /* **************************** [v] INCLUDES [v] **************************** */
-#include "Zombie.hpp" /*
-#  class Zombie;
-#*/
-#include <iostream> /*
-#namespc std;
+#include "Harl.hpp" /*
+#  class Harl;
 #*/
 #include <string> /*
 #  class std::string;
@@ -23,29 +20,63 @@
 /* **************************** [^] INCLUDES [^] **************************** */
 
 /* ***************************** [v] USING [v] ****************************** */
-using std::cout;
 using std::string;
-using std::flush;
 /* ***************************** [^] USING [^] ****************************** */
 
-Zombie::Zombie(void) /* CONSTRUCTOR */
+Harl::Harl(void) /* CONSTRUCTOR */
 {
 	(void)0;
 }
 
-Zombie::~Zombie(void) /* DESTRUCTOR */
+Harl::~Harl(void) /* DESTRUCTOR */
 {
-	cout << "Zombie " << this->_name << " has been destroyed." << endl;
+	(void)0;
 }
 
 void
-	Zombie::announce(void)
+	Harl::debug(void)
 {
-	cout << this->_name << ": BraiiiiiiinnnzzzZ..." << endl;
+	cout << "love having extra bacon for my \
+		7XL-double-cheese-triple-pickle-special-ketchup burger. \
+		I really do!" << endl;
 }
 
 void
-	Zombie::setName(string name)
+	Harl::info(void)
 {
-	this->_name = name;
+	cout << "I cannot believe adding extra bacon costs more money. You didn't \
+		put enough bacon in my burger! If you did, I wouldn't be asking for \
+		more!" << endl;
+}
+
+void
+	Harl::warning(void)
+{
+	cout << "I think I deserve to have some extra bacon for free. \
+		I've been coming foryears whereas you started working here \
+		since last month." << endl;
+}
+
+void
+	Harl::error(void)
+{
+	cout << "This is unacceptable! I want to speak to the manager now." << endl;
+}
+
+void
+	Harl::complain(string level)
+{
+	register int	ecx;
+	void			(Harl::*funcs)()[4];
+	string			levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+
+	funcs[0] = Harl::debug;
+	funcs[1] = Harl::debug;
+	funcs[2] = &Harl::warning;
+	funcs[3] = &Harl::error;
+	ecx = 0;
+	while (ecx < 4 && levels[ecx].compare(level))
+		++ecx;
+	if (ecx < 4)
+		(this->*funcs[ecx])();
 }

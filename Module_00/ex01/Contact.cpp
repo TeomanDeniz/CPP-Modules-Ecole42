@@ -21,7 +21,7 @@
 #     ??? std::setw(int);
 #*/
 #include <string> /*
-#  class string;
+#  class std::string;
 #istream &std::getline(istream&, string&);
 #*/
 /* **************************** [^] INCLUDES [^] **************************** */

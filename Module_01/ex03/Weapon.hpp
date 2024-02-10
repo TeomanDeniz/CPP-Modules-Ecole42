@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   Weapon.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdeniz <Discord:@teomandeniz>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,15 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ZOMBIE_HPP
-# define ZOMBIE_HPP 202402
+#ifndef WEAPON_HPP
+# define WEAPON_HPP 202402
 
 /* **************************** [v] INCLUDES [v] **************************** */
 # include <iostream> /*
 # namespc std;
 # */
 # include <string> /*
-#   class string;
+#   class std::string;
 # */
 /* **************************** [^] INCLUDES [^] **************************** */
 
@@ -26,21 +26,19 @@
 using std::string;
 /* ***************************** [^] USING [^] ****************************** */
 
-class Zombie
+class Weapon
 {
+	const string	&getType(void);
+	void			setType(string newType);
+
 public: /* ************************* [v] PUBLIC [v] ************************* */
-	Zombie(void);
-	~Zombie(void);
-	void	announce(void);
-	Zombie	*newZombie(string name);
-	void	setName(string name);
+	Weapon(string type);
+	~Weapon(void);
 /* ***************************** [^] PUBLIC [^] ***************************** */
 
 private: /* ************************ [v] PRIVATE [v] ************************ */
-	string	_name;
+	string	type;
 /* **************************** [^] PRIVATE [^] ***************************** */
 };
 
-extern Zombie	*zombieHorde(int N, string name);
-
-#endif /* ZOMBIE_HPP */
+#endif /* WEAPON_HPP */

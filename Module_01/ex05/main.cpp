@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdeniz <Discord:@teomandeniz>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,37 +10,36 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ZOMBIE_HPP
-# define ZOMBIE_HPP 202402
-
 /* **************************** [v] INCLUDES [v] **************************** */
-# include <iostream> /*
-# namespc std;
-# */
-# include <string> /*
-#   class string;
-# */
+#include "Harl.hpp" /*
+#  class Harl;
+#*/
+#include <iostream> /*
+#namespc std;
+#*/
+#include <string> /*
+#  class std::string;
+#*/
+#include <cstdlib> /*
+# define EXIT_SUCCESS;
+#*/
 /* **************************** [^] INCLUDES [^] **************************** */
 
 /* ***************************** [v] USING [v] ****************************** */
 using std::string;
 /* ***************************** [^] USING [^] ****************************** */
 
-class Zombie
+int
+	main(void)
 {
-public: /* ************************* [v] PUBLIC [v] ************************* */
-	Zombie(void);
-	~Zombie(void);
-	void	announce(void);
-	Zombie	*newZombie(string name);
-	void	setName(string name);
-/* ***************************** [^] PUBLIC [^] ***************************** */
+	string	input;
+	Harl	harl;
 
-private: /* ************************ [v] PRIVATE [v] ************************ */
-	string	_name;
-/* **************************** [^] PRIVATE [^] ***************************** */
-};
-
-extern Zombie	*zombieHorde(int N, string name);
-
-#endif /* ZOMBIE_HPP */
+	do
+	{
+		std::cout << "Enter a level: ";
+		std::cin >> input;
+		harl.complain(input);
+	} while (input.compare("exit"));
+	return (EXIT_SUCCESS);
+}

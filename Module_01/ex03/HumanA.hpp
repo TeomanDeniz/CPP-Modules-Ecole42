@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   HumanA.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdeniz <Discord:@teomandeniz>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,10 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ZOMBIE_HPP
-# define ZOMBIE_HPP 202402
+#ifndef HUMANA_HPP
+# define HUMANA_HPP 202402
 
 /* **************************** [v] INCLUDES [v] **************************** */
+#include "Weapon.hpp" /*
+#  class Weapon;
+# */
 # include <iostream> /*
 # namespc std;
 # */
@@ -26,21 +29,19 @@
 using std::string;
 /* ***************************** [^] USING [^] ****************************** */
 
-class Zombie
+class HumanA
 {
+	void	attack(void) const;
+
 public: /* ************************* [v] PUBLIC [v] ************************* */
-	Zombie(void);
-	~Zombie(void);
-	void	announce(void);
-	Zombie	*newZombie(string name);
-	void	setName(string name);
+	HumanA(string name, Weapon &weapon);
+	~HumanA(void);
 /* ***************************** [^] PUBLIC [^] ***************************** */
 
 private: /* ************************ [v] PRIVATE [v] ************************ */
 	string	_name;
+	Weapon	&_weapon;
+	HumanA(void);
 /* **************************** [^] PRIVATE [^] ***************************** */
 };
-
-extern Zombie	*zombieHorde(int N, string name);
-
-#endif /* ZOMBIE_HPP */
+#endif /* HUMANA_HPP */

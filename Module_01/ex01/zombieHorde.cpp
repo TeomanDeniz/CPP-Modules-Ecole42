@@ -18,7 +18,7 @@
 #namespc std;
 #*/
 #include <string> /*
-#  class string;
+#  class std::string;
 #*/
 /* **************************** [^] INCLUDES [^] **************************** */
 

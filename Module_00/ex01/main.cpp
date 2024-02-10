@@ -21,7 +21,7 @@
 # define EXIT_SUCCESS;
 #*/
 #include <string> /*
-#  class string;
+#  class std::string;
 #istream &std::getline(istream&, string&);
 #*/
 /* **************************** [^] INCLUDES [^] **************************** */
