@@ -28,11 +28,10 @@ using std::string;
 
 class Harl
 {
-	void	complain(string level);
-
 public: /* ************************* [v] PUBLIC [v] ************************* */
 	Harl(void);
 	~Harl(void);
+	void	complain(string level);
 /* ***************************** [^] PUBLIC [^] ***************************** */
 
 private: /* ************************ [v] PRIVATE [v] ************************ */

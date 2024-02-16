@@ -24,10 +24,11 @@
 int
 	main(void)
 {
-	Zombie			*zombies = zombieHorde(N, "zombi");
-	register auto	ecx;
+	Zombie			*zombies;
+	register int	ecx;
 
-	for (ecx = 0; ecx < N; ecx++)
+	zombies = zombieHorde(N, "zombi");
+	for (ecx = 0; ecx < N; ++ecx)
 		zombies[ecx].announce();
 
 	delete [] zombies;

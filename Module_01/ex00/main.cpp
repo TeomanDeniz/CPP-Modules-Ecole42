@@ -49,9 +49,9 @@ int
 	cout << "Creating zombie on the heap." << endl;
 	cout << "Zombie name: " << flush;
 	cin >> name;
-	Zombie *zombi2 = newZombie(name);
-	zombi2->announce();
-	delete zombi2;
+	Zombie *zombie2 = newZombie(name);
+	zombie2->announce();
+	delete zombie2;
 	cout << "Calling randomChump()." << endl;
 	randomChump("randi");
 	return (EXIT_SUCCESS);

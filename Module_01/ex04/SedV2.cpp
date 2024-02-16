@@ -14,9 +14,6 @@
 #include "SedV2.hpp" /*
 #  class SedV2;
 #*/
-#include "Weapon.hpp" /*
-#  class Weapon;
-#*/
 #include <iostream> /*
 #namespc std;
 #*/

@@ -34,7 +34,7 @@ using std::endl;
 HumanA::HumanA(string name, Weapon &weapon) /* CONSTRUCTOR */ \
 	: _name(name), _weapon(weapon)
 {
-	(void)string, (void)weapon;
+	(void)name, (void)weapon;
 }
 
 HumanA::~HumanA(void) /* DESTRUCTOR */

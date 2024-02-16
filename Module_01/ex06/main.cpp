@@ -32,18 +32,30 @@ using std::endl;
 using std::string;
 /* ***************************** [^] USING [^] ****************************** */
 
-int
-	main(int argc, char **argv)
+static void
+	toLowercase(char *stringArg)
 {
-	string	input;
+	register int	ecx;
+
+	if (!stringArg)
+		return ;
+	for (ecx = 0; !!stringArg[ecx]; ecx++)
+		if (stringArg[ecx] >= 'A' && stringArg[ecx] <= 'Z')
+			stringArg[ecx] += 'a' - 'A';
+}
+
+int
+	main(int argc, char *argv[])
+{
 	Harl	harl;
 
 	if (argc != 2)
 	{
+		cout << "Levels: DEBUG - INFO - WARNING - ERROR" << endl;
 		cout << "Example: ./harlFilter [level]" << endl;
 		return (EXIT_FAILURE);
 	}
-	input = argv[1];
-	harl.complain(input);
+	toLowercase(argv[1]);
+	harl.complain(argv[1]);
 	return (EXIT_SUCCESS);
 }

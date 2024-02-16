@@ -25,7 +25,7 @@
 /* ***************************** [v] USING [v] ****************************** */
 using std::cout;
 using std::string;
-using std::flush;
+using std::endl;
 /* ***************************** [^] USING [^] ****************************** */
 
 Zombie::Zombie(void) /* CONSTRUCTOR */

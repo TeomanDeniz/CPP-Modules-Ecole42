@@ -29,7 +29,7 @@ using std::string;
 Zombie
 	*zombieHorde(int N, string name)
 {
-	register auto	index;
+	register int	index;
 	Zombie			*zombies;
 
 	zombies = new Zombie[N];

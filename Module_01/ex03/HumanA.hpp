@@ -31,11 +31,10 @@ using std::string;
 
 class HumanA
 {
-	void	attack(void) const;
-
 public: /* ************************* [v] PUBLIC [v] ************************* */
 	HumanA(string name, Weapon &weapon);
 	~HumanA(void);
+	void	attack(void) const;
 /* ***************************** [^] PUBLIC [^] ***************************** */
 
 private: /* ************************ [v] PRIVATE [v] ************************ */

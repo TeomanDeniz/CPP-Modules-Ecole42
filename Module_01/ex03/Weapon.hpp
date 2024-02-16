@@ -28,12 +28,11 @@ using std::string;
 
 class Weapon
 {
-	const string	&getType(void);
-	void			setType(string newType);
-
 public: /* ************************* [v] PUBLIC [v] ************************* */
 	Weapon(string type);
 	~Weapon(void);
+	const string	&getType(void);
+	void			setType(string newType);
 /* ***************************** [^] PUBLIC [^] ***************************** */
 
 private: /* ************************ [v] PRIVATE [v] ************************ */

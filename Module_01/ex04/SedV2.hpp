@@ -30,11 +30,10 @@ using std::string;
 
 class SedV2
 {
-	void	replace(string s1, string s2);
-
 public: /* ************************* [v] PUBLIC [v] ************************* */
 	SedV2(string filename);
 	~SedV2(void);
+	void	replace(string s1, string s2);
 /* ***************************** [^] PUBLIC [^] ***************************** */
 
 private: /* ************************ [v] PRIVATE [v] ************************ */

@@ -21,6 +21,8 @@
 
 /* ***************************** [v] USING [v] ****************************** */
 using std::string;
+using std::cout;
+using std::endl;
 /* ***************************** [^] USING [^] ****************************** */
 
 Harl::Harl(void) /* CONSTRUCTOR */
@@ -37,24 +39,24 @@ void
 	Harl::debug(void)
 {
 	cout << "love having extra bacon for my \
-		7XL-double-cheese-triple-pickle-special-ketchup burger. \
-		I really do!" << endl;
+7XL-double-cheese-triple-pickle-special-ketchup burger. \
+I really do!" << endl;
 }
 
 void
 	Harl::info(void)
 {
 	cout << "I cannot believe adding extra bacon costs more money. You didn't \
-		put enough bacon in my burger! If you did, I wouldn't be asking for \
-		more!" << endl;
+put enough bacon in my burger! If you did, I wouldn't be asking for \
+more!" << endl;
 }
 
 void
 	Harl::warning(void)
 {
 	cout << "I think I deserve to have some extra bacon for free. \
-		I've been coming foryears whereas you started working here \
-		since last month." << endl;
+I've been coming foryears whereas you started working here \
+since last month." << endl;
 }
 
 void
@@ -67,11 +69,11 @@ void
 	Harl::complain(string level)
 {
 	register int	ecx;
-	void			(Harl::*funcs)()[4];
-	string			levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+	void			(Harl::*funcs[4])();
+	string			levels[4] = {"debug", "info", "warning", "error"};
 
-	funcs[0] = Harl::debug;
-	funcs[1] = Harl::debug;
+	funcs[0] = &Harl::debug;
+	funcs[1] = &Harl::info;
 	funcs[2] = &Harl::warning;
 	funcs[3] = &Harl::error;
 	ecx = 0;

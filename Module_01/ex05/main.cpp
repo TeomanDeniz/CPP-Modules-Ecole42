@@ -27,7 +27,21 @@
 
 /* ***************************** [v] USING [v] ****************************** */
 using std::string;
+using std::cout;
+using std::endl;
 /* ***************************** [^] USING [^] ****************************** */
+
+static void
+	toLowercase(string &stringArg)
+{
+	register int	ecx;
+
+	if (stringArg.empty())
+		return ;
+	for (ecx = 0; !!stringArg[ecx]; ecx++)
+		if (stringArg[ecx] >= 'A' && stringArg[ecx] <= 'Z')
+			stringArg[ecx] += 'a' - 'A';
+}
 
 int
 	main(void)
@@ -37,9 +51,11 @@ int
 
 	do
 	{
-		std::cout << "Enter a level: ";
+		cout << "Levels: DEBUG - INFO - WARNING - ERROR - EXIT" << endl;
+		cout << "Enter a level: ";
 		std::cin >> input;
+		toLowercase(input);
 		harl.complain(input);
-	} while (input.compare("exit"));
+	} while (input.compare("exit") && !(!std::cin.good() && input.empty()));
 	return (EXIT_SUCCESS);
 }

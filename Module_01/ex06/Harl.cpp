@@ -43,8 +43,8 @@ void
 {
 	cout << "[ DEBUG ]" << endl;
 	cout << "love having extra bacon for my \
-		7XL-double-cheese-triple-pickle-special-ketchup burger. \
-		I really do!" << endl;
+7XL-double-cheese-triple-pickle-special-ketchup burger. \
+I really do!" << endl;
 	cout << endl;
 }
 
@@ -53,8 +53,8 @@ void
 {
 	cout << "[ INFO ]" << endl;
 	cout << "I cannot believe adding extra bacon costs more money. \
-		You didn't put enough bacon in my burger! \
-		If you did, I wouldn't be asking for more!" << endl;
+You didn't put enough bacon in my burger! \
+If you did, I wouldn't be asking for more!" << endl;
 	cout << endl;
 }
 
@@ -63,8 +63,8 @@ void
 {
 	cout << "[ WARNING ]" << endl;
 	cout << "I think I deserve to have some extra bacon for free. \
-		I've been coming foryears whereas you started working here \
-		since last month." << endl;
+I've been coming foryears whereas you started working here \
+since last month." << endl;
 	cout << endl;
 }
 
@@ -80,7 +80,7 @@ void
 	Harl::complain(string level)
 {
 	register int	ecx;
-	string			levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+	string			levels[4] = {"debug", "info", "warning", "error"};
 
 	ecx = 0;
 	while (ecx < 4 && levels[ecx].compare(level))
@@ -98,6 +98,6 @@ void
 			break ;
 		default:
 			cout << "[ Probably complaining about \
-				insignificant problems ]" << endl;
+insignificant problems ]" << endl;
 	}
 }
