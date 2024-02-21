@@ -101,3 +101,21 @@ void
 	_energyPoints -= 1;
 	_hitPoints += amount;
 }
+
+const string
+	&ClapTrap::getName(void) const
+{
+	return (this->_name);
+}
+
+const unsigned int
+	&ClapTrap::getAttackDamage(void) const
+{
+	return (this->_attackDamage);
+}
+
+void
+	ClapTrap::setAttackDamage(unsigned int amount)
+{
+	this->_attackDamage = amount;
+}

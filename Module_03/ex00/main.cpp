@@ -22,8 +22,11 @@
 int
 	main(void)
 {
-	ClapTrap	clap("Ash");
+	ClapTrap	Clap("Ash");
+	ClapTrap	Staff("Staff");
 
-	clap.attack("Staff");
+	Clap.setAttackDamage(42);
+	Clap.attack(Staff.getName());
+	Staff.takeDamage(Clap.getAttackDamage());
 	return (EXIT_SUCCESS);
 }

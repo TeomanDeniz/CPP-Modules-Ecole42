@@ -27,7 +27,7 @@ public: /* ************************* [v] PUBLIC [v] ************************* */
 	Fixed(const float n);
 	Fixed(const Fixed &rhs);
 	~Fixed(void);
-	Fixed	&operator=(const Fixed &rhs);
+	Fixed	&operator = (const Fixed &rhs);
 	int		getRawBits(void) const;
 	void	setRawBits(int const raw);
 	float	toFloat(void) const;

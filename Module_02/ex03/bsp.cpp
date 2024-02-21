@@ -29,14 +29,14 @@ bool
 	Fixed	pbcArea = abs(area(point, b, c));
 	Fixed	pcaArea = abs(area(point, c, a));
 
-	return ((abcArea == pabArea) && !!pbcArea && !!pcaArea);
+	return (abcArea == pabArea + pbcArea + pcaArea);
 }
 
 static Fixed
 	abs(Fixed x)
 {
 	if (x < 0)
-		x = (~x) + 1;
+		x = x * -1;
 	return (x);
 }
 

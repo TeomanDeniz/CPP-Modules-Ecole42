@@ -53,7 +53,7 @@ Fixed::Fixed(const Fixed &rhs)
 /* ************************** [^] CONSTRUCTOR [^] *************************** */
 
 Fixed
-	&Fixed::operator=(const Fixed &rhs)
+	&Fixed::operator = (const Fixed &rhs)
 {
 	if (this != &rhs)
 		this->_fixedPointValue = rhs.getRawBits();
@@ -136,25 +136,25 @@ Fixed
 }
 
 Fixed
-	&Fixed::operator ++ (void) /* OPERATOR "++" */
+	&Fixed::operator ++ (void) /* OPERATOR "++" ++<FIXED> */
 {
 	++this->_fixedPointValue;
 	return (*this);
 }
 
 Fixed
-	Fixed::operator ++ (int) /* OPERATOR "++" <int> */
+	Fixed::operator ++ (int) /* OPERATOR "++" <int> <FIXED>++ */
 {
 	Fixed	temp(*this);
 
-	temp._fixedPointValue = this->_fixedPointValue++;
+	this->_fixedPointValue++;
 	return (temp);
 }
 
 Fixed
 	&Fixed::operator -- (void) /* OPERATOR "--" */
 {
-	--this->_fixedPointValue;
+	this->_fixedPointValue--;
 	return (*this);
 }
 
@@ -163,7 +163,7 @@ Fixed
 {
 	Fixed	temp(*this);
 
-	temp._fixedPointValue = this->_fixedPointValue--;
+	this->_fixedPointValue--;
 	return (temp);
 }
 /* **************************** [^] OPERATOR [^] **************************** */
@@ -171,9 +171,7 @@ Fixed
 Fixed
 	&Fixed::min(Fixed &a, Fixed &b)
 {
-	if (a.getRawBits() < b.getRawBits())
-		return (a);
-	return (b);
+	return ((a < b) ? a : b);
 }
 
 const Fixed

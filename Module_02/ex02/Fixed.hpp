@@ -59,9 +59,9 @@ public: /* ************************* [v] PUBLIC [v] ************************* */
 	Fixed				operator - (const Fixed &rhs) const ;
 	Fixed				operator * (const Fixed &rhs) const ;
 	Fixed				operator / (const Fixed &rhs) const ;
-	Fixed&				operator ++ (void); /* PREFIX */
+	Fixed				&operator ++ (void); /* PREFIX */
 	Fixed				operator ++ (int); /* POSTFIX */
-	Fixed&				operator -- (void); /* PREFIX */
+	Fixed				&operator -- (void); /* PREFIX */
 	Fixed				operator -- (int); /* POSTFIX */
 	int					getRawBits(void) const;
 	void				setRawBits(int const raw);

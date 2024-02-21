@@ -19,7 +19,7 @@ public: /* ************************* [v] PUBLIC [v] ************************* */
 	Fixed(void);
 	Fixed(const Fixed &rhs);
 	~Fixed(void);
-	Fixed	&operator=(const Fixed &rhs);
+	Fixed	&operator = (const Fixed &rhs);
 	int		getRawBits(void) const;
 	void	setRawBits(int const raw);
 /* ***************************** [^] PUBLIC [^] ***************************** */
