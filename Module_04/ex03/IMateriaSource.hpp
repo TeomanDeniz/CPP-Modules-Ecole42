@@ -37,7 +37,7 @@ public: /* ************************* [v] PUBLIC [v] ************************* */
 		(void)0;
 	}
 	virtual void		learnMateria(AMateria *m) = 0;
-	virtual AMateria	*createMateria(string const type) = 0;
+	virtual AMateria	*createMateria(string const &type) = 0;
 /* ***************************** [^] PUBLIC [^] ***************************** */
 
 private: /* ************************ [v] PRIVATE [v] ************************ */

@@ -33,9 +33,13 @@ Dog::Dog(void)
 {
 	cout << this->_type << " constructor called" << endl;
 	try
+	{
 		this->_brain = new Brain();
+	}
 	catch (const std::bad_alloc &e)
+	{
 		cout << "Memory Allocation is failed : " << e.what() << endl;
+	}
 }
 
 Dog::Dog(const Dog &src)

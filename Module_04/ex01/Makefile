@@ -26,13 +26,13 @@ MAIN_SRC	=	./Animal.cpp \
 	# [EXE]
 		MAIN_EXE	=	"zooBrain"
 		MAIN		=	./main.cpp
-		MAIN_EXIST	=	$(eval MAIN_EXIST := $$(MAIN:.cpp=.o))$(MAIN_EXIST)
+		MAIN_EXIST	=	$(MAIN:.cpp=.o)
 	# [EXE]
 	# [COMPILER FLAGS]
 		CFLAGS		=	-Wall -Wextra -Werror -std=c++98
 	# [COMPILER FLAGS]
 	# [.c STRINGS TO .o]
-		MAIN_OBJ	=	$(eval MAIN_OBJ := $$(MAIN_SRC:.cpp=.o))$(MAIN_OBJ)
+		MAIN_OBJ	=	$(MAIN_SRC:.cpp=.o)
 	# [.c STRINGS TO .o]
 # **************************** [^] VARIABLES [^] ***************************** #
 

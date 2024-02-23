@@ -17,6 +17,9 @@
 # include "Animal.hpp" /*
 #   class Animal;
 # */
+# include "Brain.hpp" /*
+#   class Brain;
+# */
 /* **************************** [^] INCLUDES [^] **************************** */
 
 class Dog : public Animal
