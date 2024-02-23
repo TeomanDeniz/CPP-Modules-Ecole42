@@ -24,13 +24,13 @@ MAIN_SRC	=	./ClapTrap.cpp \
 	# [EXE]
 		MAIN_EXE	=	"diamondtrap"
 		MAIN		=	./main.cpp
-		MAIN_EXIST	=	$(eval MAIN_EXIST := $$(MAIN:.cpp=.o))$(MAIN_EXIST)
+		MAIN_EXIST	=	$(MAIN:.cpp=.o)
 	# [EXE]
 	# [COMPILER FLAGS]
 		CFLAGS		=	-Wall -Wextra -Werror -std=c++98
 	# [COMPILER FLAGS]
 	# [.c STRINGS TO .o]
-		MAIN_OBJ	=	$(eval MAIN_OBJ := $$(MAIN_SRC:.cpp=.o))$(MAIN_OBJ)
+		MAIN_OBJ	=	$(MAIN_SRC:.cpp=.o)
 	# [.c STRINGS TO .o]
 # **************************** [^] VARIABLES [^] ***************************** #
 
@@ -63,10 +63,10 @@ clean:
 
 fc: fclean
 fclean: clean
-	@rm $(MAIN_EXIST) 2>/dev/null
 	@rm $(MAIN_EXE) 2>/dev/null && \
 		echo "\n $(B1F11) $(MAIN_EXE) $(F15)deleted! $(C_RESET)\n" || \
 		echo "\n $(B12F15) $(MAIN_EXE) is not exist already! $(C_RESET)\n"
+	@rm $(MAIN_EXIST) 2>/dev/null
 
 re: fc all
 

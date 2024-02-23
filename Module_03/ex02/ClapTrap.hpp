@@ -32,10 +32,10 @@ public: /* ************************* [v] PUBLIC [v] ************************* */
 	ClapTrap(string name);
 	~ClapTrap(void);
 	ClapTrap(const ClapTrap &rhs);
-	ClapTrap		&operator = (const ClapTrap &rhs);
-	void			attack(string const &target);
-	void			takeDamage(unsigned int amount);
-	void			beRepaired(unsigned int amount);
+	ClapTrap	&operator = (const ClapTrap &rhs);
+	void		attack(string const &target);
+	void		takeDamage(unsigned int amount);
+	void		beRepaired(unsigned int amount);
 /* ***************************** [^] PUBLIC [^] ***************************** */
 
 protected: /* ********************** [v] PROTECTED [v] ********************** */
