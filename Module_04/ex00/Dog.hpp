@@ -23,7 +23,9 @@ class Dog : public Animal
 {
 public: /* ************************* [v] PUBLIC [v] ************************* */
 	Dog(void);
+	Dog(const Cat &src);
 	~Dog(void);
+	Dog		&operator = (const Dog &src);
 	void	makeSound(void) const;
 /* ***************************** [^] PUBLIC [^] ***************************** */
 

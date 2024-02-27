@@ -32,6 +32,7 @@ Brain::Brain(void)
 
 Brain::Brain(const Brain &src)
 {
+	cout << "Brain copy constructor called." << endl;
 	*this = src;
 }
 /* ************************** [^] CONSTRUCTOR [^] *************************** */
@@ -49,7 +50,7 @@ Brain
 {
 	register int	index;
 
-	cout << "<Brain.cpp:32> Brain copy called." << endl;
+	cout << "Brain assignment operator called." << endl;
 	if (this != &src)
 		for (index = 0; index < 100; ++index)
 			this->_ideas[index] = src._ideas[index];

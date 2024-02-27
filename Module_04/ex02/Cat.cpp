@@ -51,7 +51,7 @@ Cat::Cat(const Cat &src)
 /* *************************** [v] DESTRUCTOR [v] *************************** */
 Cat::~Cat(void)
 {
-	cout << this->_type << " destructor called" << endl;
+	cout << this->_type << " destructor called." << endl;
 	delete this->_brain;
 }
 /* *************************** [^] DESTRUCTOR [^] *************************** */
@@ -60,11 +60,11 @@ Cat::~Cat(void)
 Cat
 	&Cat::operator = (const Cat &src) /* OPERATOR "=" */
 {
-	cout << "<Cat.cpp:32> Cat copy called." << endl;
+	cout << "Cat assignment operator called." << endl;
 	if (this != &src)
 	{
 		this->_type = src._type;
-		this->_brain = new Brain(*src._brain);
+		*this->_brain = *src._brain;
 	}
 	return (*this);
 }

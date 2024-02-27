@@ -86,24 +86,34 @@ Rules of Virtual Function:
 int
 	main(void)
 {
+	Cat*	a;
+	Cat*	b;
 
-	const Animal	*j = new Dog();
-	const Animal	*i = new Cat();
-	delete j;
-	delete i;
+	a = new Cat();
+	b = new Cat();
 
-	Dog	basic;
-	{
-		Dog tmp = basic;
-	}
-	{
-		register int	index;
-		const Animal	*animals[4] = {\
-			new Dog(), new Dog(), new Cat(), new Cat()\
-		};
+	*a = *b;
 
-		for (index = 0; index < 4; ++index)
-			delete animals[index];
-	}
+	delete a;
+	delete b;
+
+	//const Animal	*j = new Dog();
+	//const Animal	*i = new Cat();
+	//delete j;
+	//delete i;
+//
+	//Dog	basic;
+	//{
+	//	Dog tmp = basic;
+	//}
+	//{
+	//	register int	index;
+	//	const Animal	*animals[4] = {\
+	//		new Dog(), new Dog(), new Cat(), new Cat()\
+	//	};
+//
+	//	for (index = 0; index < 4; ++index)
+	//		delete animals[index];
+	//}
 	return (EXIT_SUCCESS);
 }

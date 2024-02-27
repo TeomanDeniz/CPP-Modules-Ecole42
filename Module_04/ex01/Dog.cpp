@@ -51,8 +51,8 @@ Dog::Dog(const Dog &src)
 /* *************************** [v] DESTRUCTOR [v] *************************** */
 Dog::~Dog(void)
 {
+	cout << this->_type << " destructor called." << endl;
 	delete this->_brain;
-	cout << this->_type << " destructor called" << endl;
 }
 /* *************************** [^] DESTRUCTOR [^] *************************** */
 
@@ -60,11 +60,11 @@ Dog::~Dog(void)
 Dog
 	&Dog::operator = (const Dog &src) /* OPERATOR "=" */
 {
-	cout << "<Dog.cpp:32> Dog copy called." << endl;
+	cout << "Dog assignment operator called." << endl;
 	if (this != &src)
 	{
 		this->_type = src._type;
-		this->_brain = new Brain(*src._brain);
+		*this->_brain = *src._brain;
 	}
 	return (*this);
 }

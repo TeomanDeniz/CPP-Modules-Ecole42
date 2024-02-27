@@ -28,16 +28,32 @@ using std::endl;
 Dog::Dog(void)
 	: Animal("Dog")
 {
-	cout << this->_type << " constructor called" << endl;
+	cout << this->_type << " constructor called." << endl;
+}
+
+Dog::Dog(const Dog &src)
+{
+	cout << "Dog copy constructor called." << endl;
+	*this = src;
 }
 /* ************************** [^] CONSTRUCTOR [^] *************************** */
 
 /* *************************** [v] DESTRUCTOR [v] *************************** */
 Dog::~Dog(void)
 {
-	cout << this->_type << " destructor called" << endl;
+	cout << this->_type << " destructor called." << endl;
 }
 /* *************************** [^] DESTRUCTOR [^] *************************** */
+
+/* **************************** [v] OPERATOR [v] **************************** */
+Dog
+	&Dog::operator = (const Dog &rhs) /* OPERATOR "=" */
+{
+	(void)rhs;
+	cout << "Dog assignment operator called." << endl;
+	return (*this);
+}
+/* **************************** [^] OPERATOR [^] **************************** */
 
 void
 	Dog::makeSound(void) const

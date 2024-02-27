@@ -28,16 +28,32 @@ using std::endl;
 Cat::Cat(void)
 	: Animal("Cat")
 {
-	cout << this->_type << " constructor called" << endl;
+	cout << this->_type << " constructor called." << endl;
+}
+
+Cat::Cat(const Cat &src)
+{
+	cout << "Cat copy constructor called." << endl;
+	*this = src;
 }
 /* ************************** [^] CONSTRUCTOR [^] *************************** */
 
 /* *************************** [v] DESTRUCTOR [v] *************************** */
 Cat::~Cat(void)
 {
-	cout << this->_type << " destructor called" << endl;
+	cout << this->_type << " destructor called." << endl;
 }
 /* *************************** [^] DESTRUCTOR [^] *************************** */
+
+/* **************************** [v] OPERATOR [v] **************************** */
+Cat
+	&Cat::operator = (const Cat &rhs) /* OPERATOR "=" */
+{
+	(void)rhs;
+	cout << "Cat assignment operator called." << endl;
+	return (*this);
+}
+/* **************************** [^] OPERATOR [^] **************************** */
 
 void
 	Cat::makeSound(void) const
