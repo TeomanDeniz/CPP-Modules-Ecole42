@@ -5,31 +5,63 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdeniz <Discord:@teomandeniz>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/01 09:29:11 by hdeniz            #+#    #+#             */
-/*   Updated: 2024/01/02 02:07:23 by hdeniz           ###   ########.fr       */
+/*   Created: 2024/02/01 18:00:03 by hdeniz            #+#    #+#             */
+/*   Updated: 2024/02/01 18:00:29 by hdeniz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ROBOTOMYREQUESTFORM_HPP
-#define ROBOTOMYREQUESTFORM_HPP
+#	define ROBOTOMYREQUESTFORM_HPP 202402
 
-#include "Form.hpp"
+/* **************************** [v] INCLUDES [v] **************************** */
+#	include "AForm.hpp" /*
+#	  class AForm;
+#	        */
+#	include "Bureaucrat.hpp" /*
+#	  class Bureaucrat;
+#	        */
+#	include <fstream> /*
+#	nmspace ostream;
+#	        */
+#	include <iostream> /*
+#	nmspace std;
+#	        */
+/* **************************** [^] INCLUDES [^] **************************** */
 
-class RobotomyRequestForm : public Form
+/* ***************************** [v] USING [v] ****************************** */
+using std::string;
+using std::ostream;
+/* ***************************** [^] USING [^] ****************************** */
+
+/* ***************************** [v] UNION [v] ****************************** */
+typedef union s_cast
 {
-private:
-    const std::string   _target;
+	const char		*ptr;
+	unsigned long	integer;
+}				t_cast;
+/* ***************************** [^] UNION [^] ****************************** */
 
-    RobotomyRequestForm();
+/* *************************** [v] PROTOTYPES [v] *************************** */
+class	Bureaucrat;
+class	AForm;
+class	RobotomyRequestForm;
+ostream	&operator << (ostream &out, const RobotomyRequestForm &form);
+/* *************************** [^] PROTOTYPES [^] *************************** */
 
-public:
-    RobotomyRequestForm( const std::string& target );
-    RobotomyRequestForm( const RobotomyRequestForm& src );
-    ~RobotomyRequestForm();
-
-    RobotomyRequestForm &operator=( RobotomyRequestForm& rhs );
-
-    void        execute( const Bureaucrat& executor ) const;
+class RobotomyRequestForm : public AForm
+{
+public: /* ************************* [v] PUBLIC [v] ************************* */
+	RobotomyRequestForm(const string target);
+	RobotomyRequestForm(const RobotomyRequestForm &copy);
+	~RobotomyRequestForm(void);
+	RobotomyRequestForm	&operator = (const RobotomyRequestForm &other);
+	const string		&getTarget(void) const;
+	void				execute(Bureaucrat const &executor) const;
+/* ***************************** [^] PUBLIC [^] ***************************** */
+private: /* ************************ [v] PRIVATE [v] ************************ */
+	const string	_target;
+	RobotomyRequestForm(void);
+/* **************************** [^] PRIVATE [^] ***************************** */
 };
 
-#endif // ROBOTOMYREQUESTFORM_HPP
+#endif /* ROBOTOMYREQUESTFORM_HPP */

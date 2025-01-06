@@ -5,33 +5,56 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdeniz <Discord:@teomandeniz>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/01 09:29:11 by hdeniz            #+#    #+#             */
-/*   Updated: 2024/01/02 02:07:23 by hdeniz           ###   ########.fr       */
+/*   Created: 2024/02/01 18:00:03 by hdeniz            #+#    #+#             */
+/*   Updated: 2024/02/01 18:00:29 by hdeniz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHRUBBERYCREATIONFORM_HPP
-#define SHRUBBERYCREATIONFORM_HPP
+#	define SHRUBBERYCREATIONFORM_HPP 202402
 
-#include "Form.hpp"
-#include <fstream>
+/* **************************** [v] INCLUDES [v] **************************** */
+#	include "AForm.hpp" /*
+#	  class AForm;
+#	        */
+#	include "Bureaucrat.hpp" /*
+#	  class Bureaucrat;
+#	        */
+#	include <fstream> /*
+#	nmspace ostream;
+#	        */
+#	include <iostream> /*
+#	nmspace std;
+#	        */
+/* **************************** [^] INCLUDES [^] **************************** */
 
-class ShrubberyCreationForm : public Form {
+/* ***************************** [v] USING [v] ****************************** */
+using std::string;
+using std::ostream;
+/* ***************************** [^] USING [^] ****************************** */
 
-private:
-    const std::string   _target;
+/* *************************** [v] PROTOTYPES [v] *************************** */
+class	Bureaucrat;
+class	AForm;
+class	ShrubberyCreationForm;
+ostream	&operator << (ostream &out, const ShrubberyCreationForm &form);
+/* *************************** [^] PROTOTYPES [^] *************************** */
 
-    ShrubberyCreationForm();
-
-public:
-    ShrubberyCreationForm( const std::string& target );
-    ShrubberyCreationForm( const ShrubberyCreationForm& src );
-    ~ShrubberyCreationForm();
-
-    ShrubberyCreationForm&  operator=( ShrubberyCreationForm& rhs );
-
-    void        execute( const Bureaucrat& executor ) const;
-
+class ShrubberyCreationForm : public AForm
+{
+public: /* ************************* [v] PUBLIC [v] ************************* */
+	ShrubberyCreationForm(const string target);
+	ShrubberyCreationForm(const ShrubberyCreationForm &copy);
+	~ShrubberyCreationForm(void);
+	ShrubberyCreationForm	&operator = \
+		(const ShrubberyCreationForm &other);
+	void					execute(Bureaucrat const &executor) const;
+	const string			&getTarget(void) const;
+/* ***************************** [^] PUBLIC [^] ***************************** */
+private: /* ************************ [v] PRIVATE [v] ************************ */
+	const string	_target;
+	ShrubberyCreationForm(void);
+/* **************************** [^] PRIVATE [^] ***************************** */
 };
 
-#endif // SHRUBBERYCREATIONFORM_HPP
+#endif /* SHRUBBERYCREATIONFORM_HPP */

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.cpp                                           :+:      :+:    :+:   */
+/*   AForm.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdeniz <Discord:@teomandeniz>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,14 +11,11 @@
 /* ************************************************************************** */
 
 /* **************************** [v] INCLUDES [v] **************************** */
-%:include "Form.hpp" /*
-%: define MAX_AUTHORITY_POINT
-%: define MIN_AUTHORITY_POINT
-%:  class Form;
-%:        */
-%:include <iostream> /*
-%:nmspace std;
-%:        */
+#include "AForm.hpp" /*
+# define MAX_AUTHORITY_POINT
+# define MIN_AUTHORITY_POINT
+#  class AForm;
+#        */
 /* **************************** [^] INCLUDES [^] **************************** */
 
 /* ***************************** [v] USING [v] ****************************** */
@@ -29,30 +26,30 @@ using std::ostream;
 /* ***************************** [^] USING [^] ****************************** */
 
 /* ************************** [v] CONSTRUCTOR [v] *************************** */
-Form::Form(void)
-	: _name("Default Form"), \
+AForm::AForm(void)
+	: _name("Default AForm"), \
 	  _signGrade(MIN_AUTHORITY_POINT), \
 	  _execGrade(MIN_AUTHORITY_POINT)
-<%
-	cout << "Default constructor called (Form)" << endl;
+{
+	cout << "Default constructor called (AForm)" << endl;
 	setIsSigned(0);
-%>
+}
 
-Form::Form(const string name)
+AForm::AForm(const string name)
 	: _name(name), \
 	  _signGrade(MIN_AUTHORITY_POINT), \
 	  _execGrade(MIN_AUTHORITY_POINT)
-<%
-	cout << "Name parameterized constructor called (Form)" << endl;
+{
+	cout << "Name parameterized constructor called (AForm)" << endl;
 	setIsSigned(0);
-%>
+}
 
-Form::Form(const string name, const int signGrade, const int execGrade)
+AForm::AForm(const string name, const int signGrade, const int execGrade)
 	: _name(name), \
 	  _signGrade(signGrade), \
 	  _execGrade(execGrade)
-<%
-	cout << "Multi parameterized constructor called (Form)" << endl;
+{
+	cout << "Multi parameterized constructor called (AForm)" << endl;
 
 	if (signGrade < MAX_AUTHORITY_POINT || execGrade < MAX_AUTHORITY_POINT)
 		throw GradeTooHighException();
@@ -60,98 +57,110 @@ Form::Form(const string name, const int signGrade, const int execGrade)
 		throw GradeTooLowException();
 
 	setIsSigned(0);
-%>
+}
 
-Form::Form(const Form &copy)
-	: _name(copy.getName()), _signGrade(copy.getSignGrade()),
+AForm::AForm(const AForm &copy)
+	: _name(copy.getName()), \
+	  _signGrade(copy.getSignGrade()), \
 	  _execGrade(copy.getExecGrade())
-<%
-	cout << "Copy constructor called (Form)" << endl;
+{
+	cout << "Copy constructor called (AForm)" << endl;
 	this->_isSigned = copy.getIsSigned();
-%>
+}
 /* ************************** [^] CONSTRUCTOR [^] *************************** */
 
 /* *************************** [v] DESTRUCTOR [v] *************************** */
-Form::~Form(void)
-<%
-	cout << "Destructor called (Form)" << endl;
-%>
+AForm::~AForm(void)
+{
+	cout << "Destructor called (AForm)" << endl;
+}
 /* *************************** [^] DESTRUCTOR [^] *************************** */
 
 /* **************************** [v] OPERATOR [v] **************************** */
-Form
-	&Form::operator=(const Form &other) /* OPERATOR "=" */
-<%
-	cout << "Copy assignment operator called Form" << endl;
+AForm
+	&AForm::operator = (const AForm &other) /* OPERATOR "=" */
+{
+	cout << "Copy assignment operator called (AForm)" << endl;
 
 	if (this != &other)
 		this->_isSigned = other.getIsSigned();
 
 	return (*this);
-%>
+}
 
 ostream
-	&operator << (ostream &out, const Form &form) /* OPERATOR "<<" */
-<%
-	out << "*------------- Form Info -------------" << endl;
-	out << "* Form: " << form.getName() << ", Signed: " << \
-		(form.getIsSigned() ? "Yes" : "No") << endl;
-	out << "* Grade to sign: " << form.getSignGrade() << endl;
-	out << "* Grade to execute: " << form.getExecGrade();
+	&operator << (ostream &out, const AForm &form) /* OPERATOR "<<" */
+{
+	out << "------------- Form Info -------------" << endl;
+	out << "Form: " << form.getName() << ", Signed: ";
+
+	if (form.getIsSigned())
+		out << "Yes" << endl;
+	else
+		out << "No" << endl;
+
+	out << "Grade to sign: " << form.getSignGrade() << endl;
+	out << "Grade to execute: " << form.getExecGrade();
 	return (out);
-%>
+}
 /* **************************** [^] OPERATOR [^] **************************** */
 
+/* ************************ [v] THROW EXPECTIONS [v] ************************ */
+const char
+	*AForm::GradeTooHighException::what() const throw()
+{
+	return ("Grade is too high (Form)");
+}
+
+const char
+	*AForm::GradeTooLowException::what() const throw()
+{
+	return ("Grade is too low (Form)");
+}
+
+const char
+	*AForm::FormNotSignedException::what() const throw()
+{
+	return ("Form needs to be signed before executing");
+}
+/* ************************ [^] THROW EXPECTIONS [^] ************************ */
+
 void
-	Form::setIsSigned(int isSigned)
-<%
+	AForm::setIsSigned(int isSigned)
+{
 	this->_isSigned = isSigned;
-%>
+}
 
 const string
-	&Form::getName(void) const
-<%
+	&AForm::getName(void) const
+{
 	return (this->_name);
-%>
+}
 
 const int
-	&Form::getSignGrade(void) const
-<%
+	&AForm::getSignGrade(void) const
+{
 	return (this->_signGrade);
-%>
+}
 
 const int
-	&Form::getExecGrade(void) const
-<%
+	&AForm::getExecGrade(void) const
+{
 	return (this->_execGrade);
-%>
+}
 
 const int
-	&Form::getIsSigned(void) const
-<%
+	&AForm::getIsSigned(void) const
+{
 	return (this->_isSigned);
-%>
+}
 
 void
-	Form::beSigned(const Bureaucrat &bureaucrat)
-<%
+	AForm::beSigned(const Bureaucrat &bureaucrat)
+{
 	if (bureaucrat.getGrade() > getSignGrade())
 		throw GradeTooLowException();
 
 	cout << bureaucrat.getName() << " signed " << getName() << endl;
-	setIsSigned(0);
-%>
-
-/* ************************ [v] THROW EXPECTIONS [v] ************************ */
-const char
-	*Form::GradeTooHighException::what() const throw()
-<%
-	return ("Grade is too high for Form!");
-%>
-
-const char
-	*Form::GradeTooLowException::what() const throw()
-<%
-	return ("Grade is too low for Form!");
-%>
-/* ************************ [^] THROW EXPECTIONS [^] ************************ */
+	setIsSigned(1);
+}

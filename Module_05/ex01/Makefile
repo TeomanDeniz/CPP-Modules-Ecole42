@@ -17,15 +17,15 @@ MAIN_SRC	=	./Bureaucrat.cpp \
 
 # **************************** [v] VARIABLES [v] ***************************** #
 	# [COMPILER]
-		CC			=	c++
+		CC			=	g++
 	# [COMPILER]
 	# [EXE]
-		MAIN_EXE	=	"Form"
+		MAIN_EXE	=	"form"
 		MAIN		=	./main.cpp
 		MAIN_EXIST	=	$(MAIN:.cpp=.o)
 	# [EXE]
 	# [COMPILER FLAGS]
-		CFLAGS		=	-Wall -Wextra -Werror -std=c++98
+		CPPFLAGS		=	-Wall -Wextra -Werror -std=c++98
 	# [COMPILER FLAGS]
 	# [.c STRINGS TO .o]
 		MAIN_OBJ	=	$(MAIN_SRC:.cpp=.o)
@@ -43,13 +43,13 @@ MAIN_SRC	=	./Bureaucrat.cpp \
 
 %.o: %.cpp
 	@rm -f $(MAIN_EXIST) 2>/dev/null
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CPPFLAGS) -c $< -o $@
 
 all: $(MAIN_EXIST)
 
-$(MAIN_EXIST): $(MAIN_OBJ)
+$(MAIN_EXIST): $(MAIN_SRC) $(MAIN)
 	@$(CC) -c $(MAIN) -o $(MAIN_EXIST)
-	@$(CC) $(CFLAGS) $(MAIN) $(MAIN_OBJ) -o "./$(MAIN_EXE)" && \
+	@$(CC) $(CPPFLAGS) $(MAIN) $(MAIN_SRC) -o "./$(MAIN_EXE)" && \
 		echo "\n\n $(C_BLINK)$(B2F15) $(MAIN_EXE) is ready! $(C_RESET)\n"
 
 c: clean
@@ -61,7 +61,7 @@ clean:
 
 fc: fclean
 fclean: clean
-	@rm $(MAIN_EXIST) 2>/dev/null
+	@rm -f $(MAIN_EXIST) 2>/dev/null
 	@rm $(MAIN_EXE) 2>/dev/null && \
 		echo "\n $(B1F11) $(MAIN_EXE) $(F15)deleted! $(C_RESET)\n" || \
 		echo "\n $(B12F15) $(MAIN_EXE) is not exist already! $(C_RESET)\n"

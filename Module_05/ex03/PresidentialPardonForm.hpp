@@ -5,31 +5,55 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdeniz <Discord:@teomandeniz>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/01 09:29:11 by hdeniz            #+#    #+#             */
-/*   Updated: 2024/01/02 02:07:23 by hdeniz           ###   ########.fr       */
+/*   Created: 2024/02/01 18:00:03 by hdeniz            #+#    #+#             */
+/*   Updated: 2024/02/01 18:00:29 by hdeniz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PRESIDENTIALPARDONFORM_HPP
-#define PRESIDENTIALPARDONFORM_HPP
+#	define PRESIDENTIALPARDONFORM_HPP 202402
 
-#include "Form.hpp"
+/* **************************** [v] INCLUDES [v] **************************** */
+#	include "AForm.hpp" /*
+#	  class AForm;
+#	        */
+#	include "Bureaucrat.hpp" /*
+#	  class Bureaucrat;
+#	        */
+#	include <fstream> /*
+#	nmspace ostream;
+#	        */
+#	include <iostream> /*
+#	nmspace std;
+#	        */
+/* **************************** [^] INCLUDES [^] **************************** */
 
-class PresidentialPardonForm : public Form
+/* ***************************** [v] USING [v] ****************************** */
+using std::string;
+using std::ostream;
+/* ***************************** [^] USING [^] ****************************** */
+
+/* *************************** [v] PROTOTYPES [v] *************************** */
+class	Bureaucrat;
+class	AForm;
+class	PresidentialPardonForm;
+ostream	&operator << (ostream &out, const PresidentialPardonForm &form);
+/* *************************** [^] PROTOTYPES [^] *************************** */
+
+class PresidentialPardonForm : public AForm
 {
-private:
-    std::string _target;
-
-    PresidentialPardonForm();
-
-public:
-    PresidentialPardonForm( const std::string& target );
-    PresidentialPardonForm( const PresidentialPardonForm& src );
-    ~PresidentialPardonForm();
-
-    PresidentialPardonForm& operator=( const PresidentialPardonForm& rhs );
-    
-    void execute( const Bureaucrat& executor ) const;
+public: /* ************************* [v] PUBLIC [v] ************************* */
+	PresidentialPardonForm(const string target);
+	PresidentialPardonForm(const PresidentialPardonForm &copy);
+	~PresidentialPardonForm(void);
+	PresidentialPardonForm	&operator = (const PresidentialPardonForm &other);
+	const string			&getTarget(void) const;
+	void					execute(Bureaucrat const &executor) const;
+/* ***************************** [^] PUBLIC [^] ***************************** */
+private: /* ************************ [v] PRIVATE [v] ************************ */
+	const string	_target;
+	PresidentialPardonForm(void);
+/* **************************** [^] PRIVATE [^] ***************************** */
 };
 
-#endif // PRESIDENTIALPARDONFORM_HPP
+#endif /* PRESIDENTIALPARDONFORM_HPP */

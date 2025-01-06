@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
+/*   AForm.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdeniz <Discord:@teomandeniz>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,16 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-%:ifndef BUREAUCRAT_HPP
-%:	define BUREAUCRAT_HPP 202402
+#ifndef AFORM_HPP
+#	define AFORM_HPP 202402
 
 /* **************************** [v] INCLUDES [v] **************************** */
-%:	include "Form.hpp" /*
-%:	  class Form;
-%:	        */
-%:	include <iostream> /*
-%:	nmspace std;
-%:	        */
+#	include "Bureaucrat.hpp" /*
+#	 define MAX_AUTHORITY_POINT
+#	 define MIN_AUTHORITY_POINT
+#	  class Bureaucrat;
+#	        */
+#	include <iostream> /*
+#	nmspace std;
+#	        */
 /* **************************** [^] INCLUDES [^] **************************** */
 
 /* ***************************** [v] USING [v] ****************************** */
@@ -29,52 +31,57 @@ using std::exception;
 /* ***************************** [^] USING [^] ****************************** */
 
 /* ***************************** [v] MACROS [v] ***************************** */
-%:	ifndef MAX_AUTHORITY_POINT
-%:		define MAX_AUTHORITY_POINT 1
-%:	endif /* MAX_AUTHORITY_POINT */
-%:	ifndef MIN_AUTHORITY_POINT
-%:		define MIN_AUTHORITY_POINT 150
-%:	endif /* MIN_AUTHORITY_POINT */
+#	ifndef MAX_AUTHORITY_POINT
+#		define MAX_AUTHORITY_POINT 1
+#	endif /* MAX_AUTHORITY_POINT */
+#	ifndef MIN_AUTHORITY_POINT
+#		define MIN_AUTHORITY_POINT 150
+#	endif /* MIN_AUTHORITY_POINT */
 /* ***************************** [^] MACROS [^] ***************************** */
 
 /* *************************** [v] PROTOTYPES [v] *************************** */
-class	Form;
 class	Bureaucrat;
-ostream	&operator << (ostream &out, const Bureaucrat &bureaucrat);
+class	AForm;
+ostream	&operator << (ostream &out, const AForm &form);
 /* *************************** [^] PROTOTYPES [^] *************************** */
-
-class Bureaucrat
-<%
+class AForm
+{
 public: /* ************************* [v] PUBLIC [v] ************************* */
-	Bureaucrat(void);
-	Bureaucrat(const string name, const int grade);
-	Bureaucrat(const Bureaucrat &copy);
-	~Bureaucrat(void);
-	Bureaucrat		&operator = (const Bureaucrat &other);
-	void			setGrade(const int grade);
-	const int		&getGrade(void) const;
+	AForm(void);
+	AForm(const string name);
+	AForm(const string name, const int signGrade, const int execGrade);
+	AForm(const AForm &copy);
+	virtual ~AForm(void);
+	AForm			&operator = (const AForm &other);
+	void			setIsSigned(int isSigned);
 	const string	&getName(void) const;
-	void			incrementGrade(void);
-	void			incrementGrade(const unsigned int amount);
-	void			decrementGrade(void);
-	void			decrementGrade(const unsigned int amount);
-	void			signForm(Form &form);
+	const int		&getSignGrade(void) const;
+	const int		&getExecGrade(void) const;
+	const int		&getIsSigned(void) const;
+	void			beSigned(const Bureaucrat &bureaucrat);
+	virtual void	execute(Bureaucrat const &executor) const = 0;
 	class GradeTooHighException : public exception
-	<%
+	{
 	public:
 		virtual const char *what() const throw();
-	%>;
-
+	};
 	class GradeTooLowException : public exception
-	<%
+	{
 	public:
 		virtual const char *what() const throw();
-	%>;
+	};
+	class FormNotSignedException : public exception
+	{
+	public:
+		virtual const char *what() const throw();
+	};
 /* ***************************** [^] PUBLIC [^] ***************************** */
 private: /* ************************ [v] PRIVATE [v] ************************ */
 	const string	_name;
-	int				_grade;
+	const int		_signGrade;
+	const int		_execGrade;
+	int				_isSigned;
 /* **************************** [^] PRIVATE [^] ***************************** */
-%>;
+};
 
-%:endif /* BUREAUCRAT_HPP */
+#endif /* AFORM_HPP */

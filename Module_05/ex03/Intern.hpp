@@ -5,26 +5,57 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdeniz <Discord:@teomandeniz>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/01 09:29:11 by hdeniz            #+#    #+#             */
-/*   Updated: 2024/01/02 02:07:23 by hdeniz           ###   ########.fr       */
+/*   Created: 2024/02/01 18:00:03 by hdeniz            #+#    #+#             */
+/*   Updated: 2024/02/01 18:00:29 by hdeniz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INTERN_HPP
-#define INTERN_HPP
+#	define INTERN_HPP 202402
 
-#include "Form.hpp"
+/* **************************** [v] INCLUDES [v] **************************** */
+#	include <iostream> /*
+#	nmspace std;
+#	        */
+#	include <string> /*
+#	  class std::string;
+#	        */
+#	include "AForm.hpp" /*
+#	  class AForm;
+#	        */
+#	include "ShrubberyCreationForm.hpp" /*
+#	  class ShrubberyCreationForm;
+#	        */
+#	include "RobotomyRequestForm.hpp" /*
+#	  class RobotomyRequestForm;
+#	        */
+#	include "PresidentialPardonForm.hpp" /*
+#	  class PresidentialPardonForm;
+#	        */
+/* **************************** [^] INCLUDES [^] **************************** */
 
-class Intern {
+/* ***************************** [v] USINGS [v] ***************************** */
+using std::string;
+/* ***************************** [^] USINGS [^] ***************************** */
 
-public:
-    Intern();
-    Intern( const Intern& src );
-    ~Intern();
+/* *************************** [v] PROTOTYPES [v] *************************** */
+class AForm;
+/* *************************** [^] PROTOTYPES [^] *************************** */
 
-    Intern& operator=( const Intern& rhs );
-
-    Form*   makeForm( std::string name, std::string target );
+class Intern
+{
+public: /* ************************* [v] PUBLIC [v] ************************* */
+	Intern(void);
+	Intern(const Intern &copy);
+	~Intern(void);
+	Intern	&operator = (const Intern &other);
+	AForm	*makeForm(const string formName, const string target);
+/* ***************************** [^] PUBLIC [^] ***************************** */
+private: /* ************************ [v] PRIVATE [v] ************************ */
+	AForm	*_makeShrubberyCreationForm(const string target);
+	AForm	*_makeRobotomyRequestForm(const string target);
+	AForm	*_makePresidentialPardonForm(const string target);
+/* **************************** [^] PRIVATE [^] ***************************** */
 };
 
-#endif // INTERN_HPP
+#endif /* INTERN_HPP */

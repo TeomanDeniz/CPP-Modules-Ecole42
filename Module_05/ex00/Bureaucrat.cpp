@@ -5,92 +5,162 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdeniz <Discord:@teomandeniz>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/01 09:29:11 by hdeniz            #+#    #+#             */
-/*   Updated: 2024/01/02 02:07:23 by hdeniz           ###   ########.fr       */
+/*   Created: 2024/02/01 18:00:03 by hdeniz            #+#    #+#             */
+/*   Updated: 2024/02/01 18:00:29 by hdeniz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* **************************** [v] INCLUDES [v] **************************** */
 #include "Bureaucrat.hpp" /*
+# define MAX_AUTHORITY_POINT
+# define MIN_AUTHORITY_POINT
 #  class Bureaucrat;
-#*/
+#        */
 #include <iostream> /*
-#namespc std;
-#*/
-#include <string> /*
-#  class std::string;
-#*/
+#nmspace std;
+#        */
+#include <sstream>  /*
+#explici std::ostringstream;
+#        */
 /* **************************** [^] INCLUDES [^] **************************** */
 
 /* ***************************** [v] USING [v] ****************************** */
+using std::cout;
+using std::endl;
 using std::string;
+using std::ostream;
 /* ***************************** [^] USING [^] ****************************** */
 
 /* ************************** [v] CONSTRUCTOR [v] *************************** */
-Bureaucrat::Bureaucrat(const string &name, int grade) \
-	: _name(name), _grade(grade)
+Bureaucrat::Bureaucrat(void)
+	: _name("Default")
 {
-	if (grade < 1)
-		throw Bureaucrat::GradeTooHighException();
-	if (grade > 150)
-		throw Bureaucrat::GradeTooLowException();
+	cout << "Default constructor called (Bureaucrat)" << endl;
+	setGrade(MIN_AUTHORITY_POINT);
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &src) \
-	: _name(src._name), _grade(src._grade)
+Bureaucrat::Bureaucrat(const string name, const int grade)
+	: _name(name)
 {
-	(void)0;
+	cout << "Parameterized constructor called (Bureaucrat)" << endl;
+	if (grade < MAX_AUTHORITY_POINT)
+		throw GradeTooHighException();
+	else if (grade > MIN_AUTHORITY_POINT)
+		throw GradeTooLowException();
+
+	setGrade(grade);
+}
+
+Bureaucrat::Bureaucrat(const Bureaucrat &copy)
+	: _name(copy.getName())
+{
+	cout << "Copy constructor called (Bureaucrat)" << endl;
+	*this = copy;
 }
 /* ************************** [^] CONSTRUCTOR [^] *************************** */
 
 /* *************************** [v] DESTRUCTOR [v] *************************** */
 Bureaucrat::~Bureaucrat(void)
 {
-	(void)0;
+	cout << "Destructor called (Bureaucrat)" << endl;
 }
 /* *************************** [^] DESTRUCTOR [^] *************************** */
 
 /* **************************** [v] OPERATOR [v] **************************** */
 Bureaucrat
-	&Bureaucrat::operator = (const Bureaucrat &rhs) /* OPERATOR "=" */
+	&Bureaucrat::operator = (const Bureaucrat &other) /* OPERATOR "=" */
 {
-	if (this != &rhs)
-		_grade = rhs.getGrade();
+	cout << "Assignation operator called (Bureaucrat)" << endl;
+
+	if (this != &other)
+		this->_grade = other.getGrade();
+
 	return (*this);
 }
 
-std::ostream
-	&operator << (std::ostream &o, const Bureaucrat &rhs) /* OPERATOR "<<" */
+ostream
+	&operator << (ostream &out, const Bureaucrat &b) /* OPERATOR "<<" */
 {
-	o << rhs.getName() << ", bureaucrat grade " << rhs.getGrade();
-	return (o);
+	std::ostringstream	oss;
+
+	oss << b.getGrade();
+	out << b.getName();
+	out << ", bureaucrat grade ";
+	out << oss.str();
+	out << ".";
+	return (out);
 }
 /* **************************** [^] OPERATOR [^] **************************** */
 
-string
-	Bureaucrat::getName(void) const
+/* ************************ [v] THROW EXPECTIONS [v] ************************ */
+const char
+	*Bureaucrat::GradeTooHighException::what() const throw()
 {
-	return (_name);
+	return ("Grade is too high for authorization!");
 }
 
-int
-	Bureaucrat::getGrade(void) const
+const char
+	*Bureaucrat::GradeTooLowException::what() const throw()
 {
-	return (_grade);
+	return ("Grade is too low for authorization!");
+}
+/* ************************ [^] THROW EXPECTIONS [^] ************************ */
+
+void
+	Bureaucrat::setGrade(const int grade)
+{
+	if (grade < MAX_AUTHORITY_POINT)
+		throw GradeTooHighException();
+	else if (grade > MIN_AUTHORITY_POINT)
+		throw GradeTooLowException();
+
+	this->_grade = grade;
+}
+
+const string
+	&Bureaucrat::getName(void) const
+{
+	return (this->_name);
+}
+
+const int
+	&Bureaucrat::getGrade(void) const
+{
+	return (this->_grade);
 }
 
 void
 	Bureaucrat::incrementGrade(void)
 {
-	if ((_grade - 1) < 1)
-		throw Bureaucrat::GradeTooHighException();
-	--_grade;
+	if (getGrade() - 1 < MAX_AUTHORITY_POINT)
+		throw GradeTooHighException();
+
+	setGrade(getGrade() - 1);
+}
+
+void
+	Bureaucrat::incrementGrade(const unsigned int amount)
+{
+	if (getGrade() - amount < MAX_AUTHORITY_POINT)
+		throw GradeTooHighException();
+
+	setGrade(getGrade() - amount);
 }
 
 void
 	Bureaucrat::decrementGrade(void)
 {
-	if ((_grade + 1) > 150)
-		throw Bureaucrat::GradeTooLowException();
-	++_grade;
+	if (getGrade() + 1 > MIN_AUTHORITY_POINT)
+		throw GradeTooLowException();
+
+	setGrade(getGrade() + 1);
+}
+
+void
+	Bureaucrat::decrementGrade(const unsigned int amount)
+{
+	if (getGrade() + amount > MIN_AUTHORITY_POINT)
+		throw GradeTooLowException();
+
+	setGrade(getGrade() + amount);
 }

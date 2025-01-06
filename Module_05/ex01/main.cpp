@@ -5,26 +5,71 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdeniz <Discord:@teomandeniz>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/01 09:29:11 by hdeniz            #+#    #+#             */
-/*   Updated: 2024/01/02 02:07:23 by hdeniz           ###   ########.fr       */
+/*   Created: 2024/02/01 18:00:03 by hdeniz            #+#    #+#             */
+/*   Updated: 2024/02/01 18:00:29 by hdeniz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Bureaucrat.hpp"
-#include "Form.hpp"
+/* **************************** [v] INCLUDES [v] **************************** */
+%:include "Form.hpp" /*
+%:  class Form;
+%:        */
+%:include "Bureaucrat.hpp" /*
+%:  class Bureaucrat;
+%:        */
+%:include <iostream> /*
+%:nmspace std;
+%:        */
+/* **************************** [^] INCLUDES [^] **************************** */
 
-int main( void )
-{
+/* ***************************** [v] USING [v] ****************************** */
+using std::cout;
+using std::endl;
+using std::exception;
+/* ***************************** [^] USING [^] ****************************** */
 
-    try {
-        Bureaucrat bureaucrat("ash",11);
-        Form form("formName", 10);
+int
+	main(void)
+<%
+	void		*layers<:2:>;
+	Bureaucrat	*boss;
+	Form		*form;
 
-        bureaucrat.signForm(form);
+	boss = (Bureaucrat *)0;
+	form = (Form *)0;
+	0<:layers:> = &&End;
+	1<:layers:> = &&Error;
 
-        std::cout << form << std::endl;
-    } catch (std::exception &e) {
-        std::cout << e.what() << std::endl;
-    }
-    return EXIT_SUCCESS;
-}
+	try
+	<%
+		boss = new Bureaucrat("Random Boss", 13);
+		form = new Form("Cpp Module 05", 31, 31);
+
+		cout << *boss << endl;
+		cout << *form << endl;
+		boss->incrementGrade();
+		cout << *boss << endl;
+		boss->incrementGrade(10);
+		cout << *boss << endl;
+		boss->signForm(*form);
+		cout << *form << endl;
+		boss->decrementGrade(30);
+		cout << *boss << endl;
+		boss->signForm(*form);
+		cout << *form << endl;
+		delete boss;
+		delete form;
+	%>
+	catch (const exception &error)
+	<%
+		delete boss;
+		delete form;
+		cout << error.what() << endl;
+		goto *(1<:layers:>);
+	%>
+
+End:
+	return (0);
+Error:
+	return (1);
+%>

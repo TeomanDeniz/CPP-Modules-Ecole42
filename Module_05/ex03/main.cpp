@@ -5,49 +5,79 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdeniz <Discord:@teomandeniz>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/01 09:29:11 by hdeniz            #+#    #+#             */
-/*   Updated: 2024/01/02 02:07:23 by hdeniz           ###   ########.fr       */
+/*   Created: 2024/02/01 18:00:03 by hdeniz            #+#    #+#             */
+/*   Updated: 2024/02/01 18:00:29 by hdeniz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Form.hpp"
-#include "Bureaucrat.hpp"
-#include "ShrubberyCreationForm.hpp"
-#include "RobotomyRequestForm.hpp"
-#include "PresidentialPardonForm.hpp"
-#include "Intern.hpp"
+/* **************************** [v] INCLUDES [v] **************************** */
+#include "Bureaucrat.hpp" /*
+#  class Bureaucrat;
+#        */
+#include "Intern.hpp" /*
+#  class Intern;
+#        */
+#include "AForm.hpp" /*
+#  class AForm;
+#        */
+#include "RobotomyRequestForm.hpp"/*
+#  class RobotomyRequestForm;
+#        */
+#include "PresidentialPardonForm.hpp"/*
+#  class PresidentialPardonForm;
+#        */
+#include "ShrubberyCreationForm.hpp"/*
+#  class ShrubberyCreationForm;
+#        */
+#include <iostream> /*
+#nmspace std;
+#        */
+/* **************************** [^] INCLUDES [^] **************************** */
 
-int main( void )
+/* ***************************** [v] USINGS [v] ***************************** */
+using std::cerr;
+using std::endl;
+using std::cout;
+/* ***************************** [^] USINGS [^] ***************************** */
+
+int
+	main(void)
 {
-    {
-        Intern  someRandomIntern;
-        Form*   rrf;
+	Intern	someRandomIntern;
+	AForm	*rrf;
+	AForm	*ppf;
+	AForm	*scf;
+	AForm	*unknown;
 
-        // rrf = someRandomIntern.makeForm("robotomy", "Bender");
-        rrf = someRandomIntern.makeForm("robotomy request", "Bender");
-        delete rrf;
-    }
+	rrf = 0;
+	ppf = 0;
+	scf = 0;
+	unknown = 0;
 
-    try {
-        Bureaucrat bureaucrat("ash", 2); // error with 200
-        ShrubberyCreationForm form1("Shrubbery");
-        RobotomyRequestForm form2("Robotomy");
-        PresidentialPardonForm form3("President");
+	try
+	{
+		rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+		ppf = someRandomIntern.makeForm("presidential pardon", "Bender");
+		scf = someRandomIntern.makeForm("shrubbery creation", "Bender");
+		unknown = someRandomIntern.makeForm("unknown", "Bender");
 
-        std::cout << "\n--------------- Form 1 ( Shrubbery ) ---------------" << std::endl;
-        bureaucrat.signForm(form1);
-        bureaucrat.executeForm(form1);
-        std::cout << "\n--------------- Form 2 ( Robotomy ) ---------------" << std::endl;
-        bureaucrat.signForm(form2);
-        bureaucrat.executeForm(form2);
-        bureaucrat.executeForm(form2);
-        bureaucrat.executeForm(form2);
-        bureaucrat.executeForm(form2);
-        std::cout << "\n--------------- Form 3 ( President ) ---------------" << std::endl;
-        bureaucrat.signForm(form3);
-        bureaucrat.executeForm(form3);
-    } catch (std::exception &e) {
-        std::cout << e.what() << std::endl;
-    }
-    return EXIT_SUCCESS;
+		cout << *dynamic_cast <RobotomyRequestForm *>(rrf) << endl;
+		cout << *dynamic_cast <PresidentialPardonForm *>(ppf) << endl;
+		cout << *dynamic_cast <ShrubberyCreationForm *>(scf) << endl;
+
+		delete rrf;
+		delete ppf;
+		delete scf;
+		delete unknown;
+	}
+	catch(const exception &error)
+	{
+		cerr << error.what() << endl;
+		delete rrf;
+		delete ppf;
+		delete scf;
+		delete unknown;
+	}
+
+	return (0);
 }

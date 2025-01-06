@@ -5,55 +5,123 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdeniz <Discord:@teomandeniz>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/01 09:29:11 by hdeniz            #+#    #+#             */
-/*   Updated: 2024/01/02 02:07:23 by hdeniz           ###   ########.fr       */
+/*   Created: 2024/02/01 18:00:03 by hdeniz            #+#    #+#             */
+/*   Updated: 2024/02/01 18:00:29 by hdeniz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ShrubberyCreationForm.hpp"
+/* **************************** [v] INCLUDES [v] **************************** */
+#include "ShrubberyCreationForm.hpp" /*
+#nmspace ostream;
+#  class ShrubberyCreationForm;
+#        */
+#include <iostream> /*
+#nmspace std;
+#        */
+/* **************************** [^] INCLUDES [^] **************************** */
 
-ShrubberyCreationForm::ShrubberyCreationForm( const std::string& target ) : Form( "ShrubberyCreationForm", 145, 137 ), _target( target ) {}
+/* ***************************** [v] USING [v] ****************************** */
+using std::ofstream;
+using std::string;
+using std::cout;
+using std::endl;
+/* ***************************** [^] USING [^] ****************************** */
 
-ShrubberyCreationForm::ShrubberyCreationForm( const ShrubberyCreationForm& src ) : Form( src ), _target( src._target ) {}
-
-ShrubberyCreationForm::~ShrubberyCreationForm() {}
-
-ShrubberyCreationForm& ShrubberyCreationForm::operator=( ShrubberyCreationForm& rhs ) {
-    (void)rhs;
-    return *this;
+/* ************************** [v] CONSTRUCTOR [v] *************************** */
+ShrubberyCreationForm::ShrubberyCreationForm(void)
+	: AForm("Default Form", 92, 11), \
+	  _target("Default Target")
+{
+	cout << "Default constructor called (ShrubberyCreationForm)" << endl;
 }
 
-void    ShrubberyCreationForm::execute( const Bureaucrat& executor ) const {
-    if ( this->getSigned() == false )
-        throw Form::NotSignedException();
-    else if ( executor.getGrade() > this->getGradeToExecute() ) {
-        throw Form::GradeTooLowException();
-    }
+ShrubberyCreationForm::ShrubberyCreationForm(const string target)
+	: AForm("Shrubbery Creation Form", 92, 11), \
+	  _target(target)
+{
+	cout << "Name parameterized constructor called (ShrubberyCreationForm)" \
+		<< endl;
+}
 
-    std::ofstream file( this->getName() + "_shrubbery" );
-    file << "                      ___" << std::endl;
-    file << "                _,-'\"\"   \"\"\"\"`--." << std::endl;
-    file << "             ,-'          __,,-- \\" << std::endl;
-    file << "           ,\'    __,--\"\"\"\"dF      )" << std::endl;
-    file << "          /   .-\"Hb_,--\"\"dF      /" << std::endl;
-    file << "        ,\'       _Hb ___dF\"-._,-'" << std::endl;
-    file << "      ,'      _,-\"\"\"\"   \"\"--..__" << std::endl;
-    file << "     (     ,-'                  `." << std::endl;
-    file << "      `._,'     _   _             ;" << std::endl;
-    file << "       ,'     ,' `-'Hb-.___..._,-'" << std::endl;
-    file << "       \\    ,'\"Hb.-\'HH`-.dHF\"" << std::endl;
-    file << "        `--\'   \"Hb  HH  dF\"" << std::endl;
-    file << "                \"Hb HH dF" << std::endl;
-    file << "                 \"HbHHdF" << std::endl;
-    file << "                  |HHHF" << std::endl;
-    file << "                  |HHH|" << std::endl;
-    file << "                  |HHH|" << std::endl;
-    file << "                  |HHH|" << std::endl;
-    file << "                  |HHH|" << std::endl;
-    file << "                  dHHHb" << std::endl;
-    file << "                .dFd|bHb.               o" << std::endl;
-    file << "      o       .dHFdH|HbTHb.          o /" << std::endl;
-    file << "\\  Y  |  \\__,dHHFdHH|HHhoHHb.__Krogg  Y" << std::endl;
-    file << "##########################################" << std::endl;
-    file.close();
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &copy)
+	: AForm(copy), \
+	  _target(copy.getTarget())
+{
+	cout << "Copy constructor called (ShrubberyCreationForm)" << endl;
+	*this = copy;
+}
+/* ************************** [^] CONSTRUCTOR [^] *************************** */
+
+/* *************************** [v] DESTRUCTOR [v] *************************** */
+ShrubberyCreationForm::~ShrubberyCreationForm(void)
+{
+	cout << "Destructor called (ShrubberyCreationForm)" << endl;
+}
+/* *************************** [^] DESTRUCTOR [^] *************************** */
+
+/* **************************** [v] OPERATOR [v] **************************** */
+ostream
+	&operator<<(ostream &out, const ShrubberyCreationForm &form)
+{ /* OPERATOR "<<" */
+	out << "------------- Form Info -------------" << endl;
+	out << "Form: " << form.getName() << ", Signed: ";
+
+	if (form.getIsSigned())
+		out << "Yes" << endl;
+	else
+		out << "No" << endl;
+
+	out << "Form Target: " << form.getTarget() << endl;
+	out << "Grade to sign: " << form.getSignGrade() << endl;
+	out << "Grade to execute: " << form.getExecGrade();
+	return (out);
+}
+
+ShrubberyCreationForm
+	&ShrubberyCreationForm::operator=(const ShrubberyCreationForm &other)
+{ /* OPERATOR "=" */
+	cout << "Assignment operator called (ShrubberyCreationForm)" << endl;
+
+	if (this != &other)
+		AForm::operator=(other);
+
+	return (*this);
+}
+/* **************************** [^] OPERATOR [^] **************************** */
+
+const string
+	&ShrubberyCreationForm::getTarget(void) const
+{
+	return (this->_target);
+}
+
+void
+	ShrubberyCreationForm::execute(Bureaucrat const &executor) const
+{
+	ofstream	out;
+
+	if (executor.getGrade() > getExecGrade())
+	{
+		cout << "The form can't be executed because ";
+		throw AForm::GradeTooLowException();
+	}
+	else if (!getIsSigned())
+	{
+		cout << "The form can't be executed because ";
+		throw AForm::FormNotSignedException();
+	}
+
+	out.open((getTarget() + "_shrubbery").c_str(), \
+		ofstream::in | ofstream::trunc);
+	out << "            ,@@@@@@@," << endl;
+	out << "    ,,,.   ,@@@@@@/@@,  .oo8888o." << endl;
+	out << " ,&%%&%&&%,@@@@@/@@@@@@,8888\\88/8o" << endl;
+	out << ",%&\\%&&%&&%,@@@\\@@@/@@@88\\88888/88'" << endl;
+	out << "%&&%&%&/%&&%@@\\@@/ /@@@88888\\88888'" << endl;
+	out << "%&&%/ %&%%&&@@\\ V /@@' `88\\8 `/88'" << endl;
+	out << "`&%\\ ` /%&'    |.|        \\ '|8'" << endl;
+	out << "    |o|        | |         | |" << endl;
+	out << "    |.|        | |         | |" << endl;
+	out << " \\\\/ ._\\//_/__/  ,\\_//__\\\\/.  \\_//__/_" << endl;
+	out.close();
 }
