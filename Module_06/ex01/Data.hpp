@@ -14,15 +14,9 @@
 %:	define DATA_HPP 202402
 
 /* **************************** [v] INCLUDES [v] **************************** */
-%:	ifdef _WIN32
-%:		include <stdint.h> /*
-%:		typedef uintptr_t;
-%:		        */
-%:	else /* PROBABLY UNIX */
-%:		include <sys/types.h> /*
-%:		typedef uintptr_t;
-%:		        */
-%:	endif /* _WIN32 */
+%:include <stdint.h> /*
+%:typedef uintptr_t;
+%:        */
 /* **************************** [^] INCLUDES [^] **************************** */
 
 typedef struct	Data

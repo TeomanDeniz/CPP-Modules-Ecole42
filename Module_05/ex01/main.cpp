@@ -34,11 +34,13 @@ int
 	void		*layers<:2:>;
 	Bureaucrat	*boss;
 	Form		*form;
+	int			boolError;
 
 	boss = (Bureaucrat *)0;
 	form = (Form *)0;
 	0<:layers:> = &&End;
 	1<:layers:> = &&Error;
+	boolError = 0;
 
 	try
 	<%
@@ -65,8 +67,13 @@ int
 		delete boss;
 		delete form;
 		cout << error.what() << endl;
-		goto *(1<:layers:>);
+		boolError = 1;
 	%>
+
+	if (boolError)
+		goto *(1<:layers:>);
+	else
+		goto *(0<:layers:>);
 
 End:
 	return (0);

@@ -14,7 +14,16 @@
 #include "Base.hpp" /*
 #  class Base;
 #        */
+#include <iostream> /*
+#nmspace std;
+#        */
 /* **************************** [^] INCLUDES [^] **************************** */
+
+/* ***************************** [v] USINGS [v] ***************************** */
+using std::exception;
+using std::cerr;
+using std::endl;
+/* ***************************** [^] USINGS [^] ***************************** */
 
 int
 	main(void)

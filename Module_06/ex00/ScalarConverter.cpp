@@ -31,6 +31,12 @@
 # define INT_MIN
 # define INT_MAX
 #        */
+#include <iomanip> /*
+#  class std::setprecision;
+#        */
+#include <sstream> /*
+#  class std::stringstream;
+#        */
 /* **************************** [^] INCLUDES [^] **************************** */
 
 /* ***************************** [v] USINGS [v] ***************************** */
@@ -134,83 +140,94 @@ int
 }
 
 int
-	ScalarConverter::isSpecial(const string &in)
+	ScalarConverter::isSpecial(const string &input)
 {
 	return (
-		in == "nan" ||
-		in == "nanf" ||
-		in == "+inf" ||
-		in == "-inf" ||
-		in == "+inff" ||
-		in == "-inff" ||
-		in == "inf" ||
-		in == "inff"
+		input == "nan" ||
+		input == "nanf" ||
+		input == "+inf" ||
+		input == "-inf" ||
+		input == "+inff" ||
+		input == "-inff" ||
+		input == "inf" ||
+		input == "inff"
 	);
 }
 
 int
-	ScalarConverter::isSpecialChar(const string &in)
-{
-	return (in.length() == 1 &&	(in[0] == '+' || in[0] == '-' || \
-		in[0] == '.' || in[0] == 'f'));
-}
-
-int
-	ScalarConverter::hasInvalidSignal(const string &in)
-{
-	return (in.find_first_of("+-") != in.find_last_of("+-"));
-}
-
-int
-	ScalarConverter::isInt(const string &in)
-{
-	return (in.find_first_not_of(DIGIT_SET) == string::npos);
-}
-
-int
-	ScalarConverter::isDouble(const string &in)
-{
-	return (in.find_first_not_of(DOUBLE_SET) == string::npos);
-}
-
-int
-	ScalarConverter::isInvalidDouble(const string &in)
+	ScalarConverter::isSpecialChar(const string &input)
 {
 	return (
-		in.find_first_of(".") != in.find_last_of(".") ||
-		isdigit(in[in.find_first_of(".") + 1]) == 0 ||
-		in.find_first_of(".") == 0
-	);
-}
-int
-	ScalarConverter::isFloat(const string &in)
-{
-	return (in.find_first_not_of(FLOAT_SET) == string::npos);
-}
-
-int
-	ScalarConverter::isInvalidFloat(const string &in)
-{
-	return (
-		in.find_first_of("f") != in.find_last_of("f") ||
-		in.find_first_of(".") != in.find_last_of(".") ||
-		in.find_first_of("f") - in.find_first_of(".") == 1 ||
-		isdigit(in[in.find_first_of(".") + 1]) == 0 ||
-		in.find_first_of(".") == 0
+		input.length() == 1 &&
+		(
+			input[0] == '+' ||
+			input[0] == '-' ||
+			input[0] == '.' ||
+			input[0] == 'f'
+		)
 	);
 }
 
 int
-	ScalarConverter::isChar(const string &in)
+	ScalarConverter::hasInvalidSignal(const string &input)
 {
-	return (in.length() == 1 && isprint(in[0]));
+	return (input.find_first_of("+-") != input.find_last_of("+-"));
+}
+
+int
+	ScalarConverter::isInt(const string &input)
+{
+	return (input.find_first_not_of(DIGIT_SET) == string::npos);
+}
+
+int
+	ScalarConverter::isDouble(const string &input)
+{
+	return (input.find_first_not_of(DOUBLE_SET) == string::npos);
+}
+
+int
+	ScalarConverter::isInvalidDouble(const string &input)
+{
+	return (
+		input.find_first_of(".") != input.find_last_of(".") ||
+		isdigit(input[input.find_first_of(".") + 1]) == 0 ||
+		input.find_first_of(".") == 0
+	);
+}
+int
+	ScalarConverter::isFloat(const string &input)
+{
+	return (input.find_first_not_of(FLOAT_SET) == string::npos);
+}
+
+int
+	ScalarConverter::isInvalidFloat(const string &input)
+{
+	return (
+		input.find_first_of("f") != input.find_last_of("f") ||
+		input.find_first_of(".") != input.find_last_of(".") ||
+		input.find_first_of("f") - input.find_first_of(".") == 1 ||
+		isdigit(input[input.find_first_of(".") + 1]) == 0 ||
+		input.find_first_of(".") == 0
+	);
+}
+
+int
+	ScalarConverter::isChar(const string &input)
+{
+	return (input.length() == 1 && isprint(input[0]));
 }
 
 void
 	ScalarConverter::fromChar(int type, const string &input)
 {
+	std::stringstream	ss(input.c_str());
+	char				c;
+
+	ss >> c;
+
 	const int		i = static_cast <int>(c);
-	const char		c = static_cast <unsigned char>(input[0]);
 	const float		f = static_cast <float>(c);
 	const double	d = static_cast <double>(c);
 
@@ -220,7 +237,11 @@ void
 void
 	ScalarConverter::fromInt(int type, const string &input)
 {
-	const int		i = atoi(input.c_str());
+	std::stringstream	ss(input.c_str());
+	int					i;
+
+	ss >> i;
+
 	const char		c = static_cast <unsigned char>(i);
 	const float		f = static_cast <float>(i);
 	const double	d = static_cast <double>(i);
@@ -231,9 +252,13 @@ void
 void
 	ScalarConverter::fromFloat(int type, const string &input)
 {
+	std::stringstream	ss(input.c_str());
+	float				f;
+
+	ss >> f;
+
 	const int		i = static_cast <int>(f);
 	const char		c = static_cast <unsigned char>(f);
-	const float		f = atof(input.c_str());
 	const double	d = static_cast <float>(f);
 
 	ScalarConverter::print(type, input, c, i, f, d);
@@ -242,10 +267,14 @@ void
 void
 	ScalarConverter::fromDouble(int type, const string &input)
 {
+	std::stringstream	ss(input.c_str());
+	double				d;
+
+	ss >> d;
+
 	const int		i = static_cast <int>(d);
 	const char		c = static_cast <unsigned char>(d);
 	const float		f = static_cast <float>(d);
-	const double	d = atof(input.c_str());
 
 	ScalarConverter::print(type, input, c, i, f, d);
 }
@@ -266,22 +295,28 @@ void
 }
 
 void
-	ScalarConverter::printInt(int type, const string &in, int i)
+	ScalarConverter::printInt(int type, const string &input, int i)
 {
-	double	check;
+	std::stringstream	ss(input.c_str());
+	double				check;
 
-	check = atof(in.c_str());
+	ss >> check;
 
-	if (type != UNION_SPECIAL && (check >= INT_MIN && check <= INT_MAX))
+	if (
+		ss.fail() ||
+		(
+			type != UNION_SPECIAL && (check >= INT_MIN && check <= INT_MAX)
+		)
+	)
 		cout << "int: " << i << endl;
 	else
 		cout << "int: impossible" << endl;
 }
 
 void
-	ScalarConverter::printSpecial(const string type, const string &in)
+	ScalarConverter::printSpecial(const string type, const string &input)
 {
-	if (in == "nan" || in == "nanf")
+	if (input == "nan" || input == "nanf")
 	{
 		cout << type << ": nan";
 
@@ -290,7 +325,7 @@ void
 
 		cout << endl;
 	}
-	else if (in == "+inf" || in == "+inff")
+	else if (input == "+inf" || input == "+inff")
 	{
 		cout << type << ": +inf";
 
@@ -299,7 +334,7 @@ void
 
 		cout << endl;
 	}
-	else if (in == "-inf" || in == "-inff")
+	else if (input == "-inf" || input == "-inff")
 	{
 		cout << type << ": -inf";
 
@@ -308,7 +343,7 @@ void
 
 		cout << endl;
 	}
-	else if (in == "inf" || in == "inff")
+	else if (input == "inf" || input == "inff")
 	{
 		cout << type << ": inf";
 
@@ -322,7 +357,8 @@ void
 void
 	ScalarConverter::printFloat(int type, const string &input, float f)
 {
-	double	check;
+	std::stringstream	ss(input.c_str());
+	double				check;
 
 	if (type == UNION_SPECIAL)
 	{
@@ -330,9 +366,14 @@ void
 		return ;
 	}
 
-	check = atof(input.c_str());
+	ss >> check;
 
-	if (type == UNION_INT && (check < INT_MIN || check > INT_MAX))
+	if (
+		ss.fail() ||
+		(
+			type == UNION_INT && (check < INT_MIN || check > INT_MAX)
+		)
+	)
 		cout << "float: impossible" << endl;
 	else
 		cout << "float: " << std::fixed << std::setprecision(1) << f << "f" \
@@ -342,7 +383,8 @@ void
 void
 	ScalarConverter::printDouble(int type, const string &input, double d)
 {
-	double	check;
+	std::stringstream	ss(input.c_str());
+	double				check;
 
 	if (type == UNION_SPECIAL)
 	{
@@ -350,9 +392,14 @@ void
 		return ;
 	}
 
-	check = atof(input.c_str());
+	ss >> check;
 
-	if (type == UNION_INT && (check < INT_MIN || check > INT_MAX))
+	if (
+		ss.fail() ||
+		(
+			type == UNION_INT && (check < INT_MIN || check > INT_MAX)
+		)
+	)
 		cout << "double: impossible" << endl;
 	else
 		cout << "double: " << std::fixed << std::setprecision(1) << d << endl;

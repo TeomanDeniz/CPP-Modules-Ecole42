@@ -15,10 +15,14 @@
 %:  class Serializer;
 %:        */
 %:include "Data.hpp" /*
-%:  class Data;
+%:typedef Data;
+%:typedef uintptr_t;
 %:        */
 %:include <iostream> /*
 %:nmspace std;
+%:        */
+%:include <stdint.h> /*
+%:typedef uintptr_t;
 %:        */
 /* **************************** [^] INCLUDES [^] **************************** */
 
@@ -61,15 +65,15 @@ int
 	%>
 
 	<%
-		Data			*ptr;
-		unsigned int *raw;
-		unsigned int *raw2;
+		Data		*ptr;
+		uintptr_t	raw;
+		uintptr_t	raw2;
 
 		ptr = (Data *)0;
-		raw = (unsigned int *)0;
-		raw2 = (unsigned int *)0;
+		raw = (uintptr_t)0;
+		raw2 = (uintptr_t)0;
 
-		raw = reinterpret_cast<unsigned int *>((Data <:1:>)<%30%>);
+		raw = reinterpret_cast<uintptr_t>((Data <:1:>)<%30%>);
 		ptr = Serializer::deserialize(raw);
 		raw2 = Serializer::serialize(ptr);
 		cout << "************************" << endl;
@@ -81,4 +85,4 @@ int
 	%>
 
 	return (0);
-}
+%>

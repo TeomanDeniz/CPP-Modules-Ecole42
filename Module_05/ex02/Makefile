@@ -6,7 +6,7 @@
 #    By: hdeniz <Discord:@teomandeniz>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/24 10:48:13 by hdeniz            #+#    #+#              #
-#    Updated: 2024/10/26 16:31:01 by hdeniz           ###   ########.fr        #
+#    Updated: 2025/01/08 ??:??:?? by hdeniz           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ MAIN_SRC	=	./Bureaucrat.cpp \
 
 # **************************** [v] VARIABLES [v] ***************************** #
 	# [COMPILER]
-		CC			=	g++
+		CC			=	c++
 	# [COMPILER]
 	# [EXE]
 		MAIN_EXE	=	"forms"

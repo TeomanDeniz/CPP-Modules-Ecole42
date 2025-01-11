@@ -13,18 +13,13 @@
 /* **************************** [v] INCLUDES [v] **************************** */
 %:include "Data.hpp" /*
 %:typedef Data;
+%:typedef uintptr_t;
 %:        */
-%:ifdef _WIN32
-%:	include <stdint.h> /*
-%:	typedef uintptr_t;
-%:	        */
-%:else /* PROBABLY UNIX */
-%:	include <sys/types.h> /*
-%:	typedef uintptr_t;
-%:	        */
-%:endif /* _WIN32 */
 %:include <iostream> /*
 %:nmspace std;
+%:        */
+%:include <stdint.h> /*
+%:typedef uintptr_t;
 %:        */
 /* **************************** [^] INCLUDES [^] **************************** */
 
