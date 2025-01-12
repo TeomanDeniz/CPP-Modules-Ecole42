@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Array.hpp                                          :+:      :+:    :+:   */
+/*   easyfind.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdeniz <Discord:@teomandeniz>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,50 +10,48 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ARRAY_HPP
-#	define ARRAY_HPP 202402
+#ifndef EASYFIND_HPP
+#	define EASYFIND_HPP 202402
 
 /* **************************** [v] INCLUDES [v] **************************** */
 #	include <iostream> /*
 #	nmspace std;
 #	        */
-#	include <cstddef> /*
-#	nmspace size_t;
+#	include <vector> /*
+#	  class std::vector;
+#	        */
+#	include <list> /*
+#	  class std::list;
+#	        */
+#	include <deque> /*
+#	  class std::deque;
+#	        */
+#	include <algorithm> /*
+#	  class std::find;
 #	        */
 /* **************************** [^] INCLUDES [^] **************************** */
 
 /* ***************************** [v] USINGS [v] ***************************** */
-using std::ostream;
-using std::exception;
+using std::out_of_range;
+using std::find;
+using std::cout;
+using std::endl;
 /* ***************************** [^] USINGS [^] ***************************** */
 
 template <typename T>
-class Array
+void
+	easyfind(const T &container, int value)
 {
-public: /* ************************* [v] PUBLIC [v] ************************* */
-	Array(void);
-	Array(unsigned int n);
-	Array(const Array &copy);
-	~Array(void);
-	Array			&operator = (const Array &other);
-	T				&operator [] (const unsigned int index);
-	const size_t	&size(void) const;
-	class OutOfBoundsException : public exception
-	{
-		virtual const char* what() const throw();
-	};
-/* ***************************** [^] PUBLIC [^] ***************************** */
-private: /* ************************ [v] PRIVATE [v] ************************ */
-	T*		_array;
-	size_t	_size;
-/* **************************** [^] PRIVATE [^] ***************************** */
-};
+	typename T::const_iterator	it;
+	typename T::const_iterator	end;
 
-/* *************************** [v] PROTOTYPES [v] *************************** */
-template<typename T>
-ostream	&operator << (ostream &out, Array <T> &arr);
-/* *************************** [^] PROTOTYPES [^] *************************** */
+	end = container.end();
+	it = find(container.begin(), container.end(), value);
 
-#include "Array.tpp"
+	if (it == end)
+		throw out_of_range("Not Found");
+	else
+		cout << "value " << *it << " found" << endl;
+}
 
-#endif /* ARRAY_HPP */
+#endif /* EASYFIND_HPP */

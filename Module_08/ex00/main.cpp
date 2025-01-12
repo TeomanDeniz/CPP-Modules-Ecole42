@@ -53,6 +53,7 @@ void
 	int	standartSize;
 	int	messageSize;
 	int	spaces;
+	int	i;
 
     standartSize = 34;
     messageSize = msg.length();

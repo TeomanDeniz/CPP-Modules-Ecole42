@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   easyfind.hpp                                       :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdeniz <Discord:@teomandeniz>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,45 +10,31 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EASYFIND_HPP
-#	define EASYFIND_HPP 202402
-
 /* **************************** [v] INCLUDES [v] **************************** */
-#	include <iostream> /*
-#	nmspace std;
-#	        */
-#	include <vector> /*
-#	  class std::vector;
-#	        */
-#	include <list> /*
-#	  class std::list;
-#	        */
-#	include <deque> /*
-#	  class std::deque;
-#	        */
+#include "Span.hpp" /*
+#  class Span;
+#        */
+#include <iostream> /*
+#nmspace std;
+#        */
 /* **************************** [^] INCLUDES [^] **************************** */
 
 /* ***************************** [v] USINGS [v] ***************************** */
-using std::out_of_range;
-using std::find;
 using std::cout;
 using std::endl;
 /* ***************************** [^] USINGS [^] ***************************** */
 
-template <typename T>
-void
-	easyfind(const T &container, int value)
+int
+	main(void)
 {
-	typename T::const_iterator	it;
-	typename T::const_iterator	end;
+	Span	sp = Span(5);
 
-	end = container.end();
-	it = find(container.begin(), container.end(), value);
-
-	if (it == end)
-		throw out_of_range("Not Found");
-	else
-		cout << "value " << *it << " found" << endl;
+	sp.addNumber(6);
+	sp.addNumber(3);
+	sp.addNumber(17);
+	sp.addNumber(9);
+	sp.addNumber(11);
+	cout << sp.shortestSpan() << endl;
+	cout << sp.longestSpan() << endl;
+	return (0);
 }
-
-#endif /* EASYFIND_HPP */

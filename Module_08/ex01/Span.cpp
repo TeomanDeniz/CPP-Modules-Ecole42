@@ -18,11 +18,15 @@
 #nmspace std;
 #        */
 #include <vector> /*
-#  class std::vector;
+#   T <> std::vector;
 #        */
 #include <ctime> /*
 # time_t time(time_t *);
 #typedef time_t;
+#        */
+#include <cstdlib> /*
+#   void srand(uint);
+#    int rand (void);
 #        */
 /* **************************** [^] INCLUDES [^] **************************** */
 
@@ -59,7 +63,7 @@ Span::~Span(void)
 }
 
 Span
-	&Span::operator=(const Span &other)
+	&Span::operator = (const Span &other)
 {
 	cout << "Copy assignment operator called (Span)" << endl;
 
@@ -129,7 +133,8 @@ int
 	return (1);
 }
 
-void	Span::bubbleSort(vector<int> &arr)
+void
+	Span::bubbleSort(vector<int> &arr)
 {
 	int	is_swap;
 	int	i;
@@ -140,9 +145,11 @@ void	Span::bubbleSort(vector<int> &arr)
 	{
 		is_swap = 0;
 
-		for (i = 0; i < arr.size(); i++)
+		for (i = 0; i < (int)arr.size(); i++)
+		{
 			if (arr[i] > arr[i + 1])
 				is_swap = swap(&arr[i], &arr[i + 1]);
+		}
 	}
 }
 
@@ -157,10 +164,10 @@ int
 
 	vector <int>	copy(getArray());
 
-	diff = copy[1] - copy[0];
+	diff = copy[0] - copy[1];
 	bubbleSort(copy);
 
-	for (i = 0; i < copy.size(); i++)
+	for (i = 0; i < (int)copy.size(); i++)
 		if (copy[i + 1] - copy[i] < diff)
 			diff = copy[i + 1] - copy[i];
 

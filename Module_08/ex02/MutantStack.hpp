@@ -30,7 +30,7 @@ using std::stack;
 using std::deque;
 /* ***************************** [^] USINGS [^] ***************************** */
 
-template <typename T, typename C = deque <T>>
+template < typename T, typename C = deque <T> >
 
 class MutantStack : public stack <T, C>
 {

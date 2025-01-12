@@ -17,11 +17,10 @@
 #	include <iostream> /*
 #	nmspace std;
 #	        */
+#	include <cstddef> /*
+#	nmspace size_t;
+#	        */
 /* **************************** [^] INCLUDES [^] **************************** */
-
-/* *************************** [v] PROTOTYPES [v] *************************** */
-class Array;
-/* *************************** [^] PROTOTYPES [^] *************************** */
 
 /* ***************************** [v] USINGS [v] ***************************** */
 using std::cout;
@@ -121,7 +120,7 @@ const char
 /* ************************ [^] THROW EXPECTIONS [^] ************************ */
 
 template <typename T>
-const int
+const size_t
 	&Array<T>::size(void) const
 {
 	return (this->_size);

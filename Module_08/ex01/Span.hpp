@@ -19,7 +19,7 @@
 #	nmspace std;
 #	        */
 #	include <vector> /*
-#	  class std::vector;
+#	   T <> std::vector;
 #	        */
 /* **************************** [^] INCLUDES [^] **************************** */
 

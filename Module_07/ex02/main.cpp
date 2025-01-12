@@ -12,10 +12,18 @@
 
 /* **************************** [v] INCLUDES [v] **************************** */
 #include "Array.hpp" /*
-#
+#  class Array;
 #        */
 #include <iostream> /*
 #nmspace std;
+#        */
+#include <cstdlib> /*
+#   void srand(uint);
+#    int rand(void);
+#        */
+#include <ctime> /*
+#typedef time_t;
+# time_t time(time_t *);
 #        */
 /* **************************** [^] INCLUDES [^] **************************** */
 
@@ -36,12 +44,12 @@ int
 	int			*mirror;
 	Array <int>	numbers(MAX_ALLOCATION);
 
-	mirror = new int[MAX_ALLOCATION]
+	mirror = new int[MAX_ALLOCATION];
 
 	if (!mirror)
 		return (1);
 
-	srand(time((void *)0));
+	srand(time((time_t *)0));
 
 	for (i = 0; i < MAX_ALLOCATION; i++)
 	{
