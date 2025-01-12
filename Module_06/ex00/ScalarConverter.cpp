@@ -303,7 +303,7 @@ void
 	ss >> check;
 
 	if (
-		ss.fail() ||
+		!ss.fail() ||
 		(
 			type != UNION_SPECIAL && (check >= INT_MIN && check <= INT_MAX)
 		)
@@ -355,7 +355,7 @@ void
 }
 
 void
-	ScalarConverter::printFloat(int type, const string &input, float f)
+	ScalarConverter::printFloat(int type, const string &input, float f, int i)
 {
 	std::stringstream	ss(input.c_str());
 	double				check;
@@ -366,7 +366,10 @@ void
 		return ;
 	}
 
-	ss >> check;
+	if (type == UNION_CHAR)
+		check = static_cast <double> (i);
+	else
+		ss >> check;
 
 	if (
 		ss.fail() ||
@@ -381,7 +384,7 @@ void
 }
 
 void
-	ScalarConverter::printDouble(int type, const string &input, double d)
+	ScalarConverter::printDouble(int type, const string &input, double d, int i)
 {
 	std::stringstream	ss(input.c_str());
 	double				check;
@@ -392,7 +395,10 @@ void
 		return ;
 	}
 
-	ss >> check;
+	if (type == UNION_CHAR)
+		check = static_cast <double> (i);
+	else
+		ss >> check;
 
 	if (
 		ss.fail() ||
@@ -411,6 +417,6 @@ float f, double d)
 {
 	printChar(type, i, c);
 	printInt(type, input, i);
-	printFloat(type, input, f);
-	printDouble(type, input, d);
+	printFloat(type, input, f, i);
+	printDouble(type, input, d, i);
 }

@@ -61,8 +61,8 @@ private: /* ************************ [v] PRIVATE [v] ************************ */
 	static void	fromDouble(int type, const string &input);
 	static void	printChar(int type, int i, char c);
 	static void	printInt(int type, const string &input, int i);
-	static void	printFloat(int type, const string &input, float f);
-	static void	printDouble(int type, const string &input, double d);
+	static void	printFloat(int type, const string &input, float f, int i);
+	static void	printDouble(int type, const string &input, double d, int i);
 	static void	printSpecial(const string type, const string &input);
 	static void	print(int type, const string &input, char c, int i, \
 		float f, double d);
