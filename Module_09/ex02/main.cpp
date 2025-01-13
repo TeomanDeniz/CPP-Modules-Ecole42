@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iter.hpp                                           :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdeniz <Discord:@teomandeniz>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ITER_HPP
-#	define ITER_HPP 202402
-
 /* **************************** [v] INCLUDES [v] **************************** */
+#include "PmergeMe.hpp" /*
+#  class PmergeMe;
+#        */
 #include <iostream> /*
 #nmspace std;
 #        */
@@ -24,42 +24,23 @@ using std::cout;
 using std::endl;
 /* ***************************** [^] USINGS [^] ***************************** */
 
-template <typename T>
-void
-	swap(T &a, T &b)
+int
+	main(int ac, char **av)
 {
-	T	temp;
+	if (ac < 2)
+	{
+		cout << "Error: not the right number of arguments." << endl;
+		return (1);
+	}
 
-	temp = a;
-	a = b;
-	b = temp;
+	try
+	{
+		PmergeMe test;
+		test.sort(av);
+	}
+	catch(const char *str)
+	{
+		cout << str << endl;
+	}
 }
-
-template <typename T>
-void
-	iter(T *array, int size, void (*f)(T &))
-{
-	int	i;
-
-	for (i = 0; i < size; i++)
-		f(array[i]);
-}
-
-template <typename T>
-void
-	iter(T *array, int size, void (*f)(const T &))
-{
-	int	i;
-
-	for (i = 0; i < size; i++)
-		f(array[i]);
-}
-
-template <typename T>
-void
-	print(T &s)
-{
-	cout << "{" << &s << "} ~> " << "[" << s << "]" << endl;
-}
-
-#endif /* ITER_HPP */
+ 

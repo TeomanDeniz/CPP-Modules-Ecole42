@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Array.hpp                                          :+:      :+:    :+:   */
+/*   PmergeMe.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdeniz <Discord:@teomandeniz>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,50 +10,82 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ARRAY_HPP
-#	define ARRAY_HPP 202402
+#ifndef PMERGEME_H
+#	define PMERGEME_H 202402
 
 /* **************************** [v] INCLUDES [v] **************************** */
-#	include <iostream> /*
-#	nmspace std;
+#	include <vector> /*
+#	   T <> vector;
 #	        */
-#	include <cstddef> /*
-#	nmspace size_t;
+#	include <deque> /*
+#	  class std::deque;
 #	        */
 /* **************************** [^] INCLUDES [^] **************************** */
 
 /* ***************************** [v] USINGS [v] ***************************** */
-using std::ostream;
-using std::exception;
+using std::vector;
+using std::deque;
 /* ***************************** [^] USINGS [^] ***************************** */
 
-template <typename T>
-class Array
+class PmergeMe
 {
 public: /* ************************* [v] PUBLIC [v] ************************* */
-	Array(void);
-	Array(unsigned int n);
-	Array(const Array &copy);
-	~Array(void);
-	Array			&operator = (const Array &other);
-	T				&operator [] (const unsigned int index);
-	const size_t	&size(void) const;
-	class OutOfBoundsException : public exception
+	PmergeMe(void);
+	PmergeMe(const PmergeMe &origin);
+	~PmergeMe(void);
+	PmergeMe	&operator = (const PmergeMe &origin);
+	void		sort(char **tab);
+	void		printVector(void);
+	void		printDeque(void);
+	void		isalnum(char *arr);
+
+	template <typename T>
+	void
+		merge_sort(T &deque_, int beg, int end)
 	{
-		virtual const char *what() const throw();
-	};
+		int	mid;
+
+		if (beg < end)
+		{
+			mid = (beg + end) / 2;
+			merge_sort(deque_, beg, mid);
+			merge_sort(deque_, mid + 1, end);
+			merge_insert(deque_, beg, mid, end);
+		}
+	}
+
+	template <typename T>
+	void
+		merge_insert(T &deque_, int left, int mid, int right)
+	{
+		int				p;
+		int				i;
+		vector <int>	temp(right - left + 1);
+
+		i = left, j = mid + 1, k = 0;
+
+		while (i <= mid && j <= right)
+		{
+			if (deque_[i] <= deque_[j])
+				temp[k++] = deque_[i++];
+			else
+				temp[k++] = deque_[j++];
+		}
+
+		while (i <= mid)
+			temp[k++] = deque_[i++];
+
+		while (j <= right)
+			temp[k++] = deque_[j++];
+
+		for (p = 0; p < k; p++)
+			deque_[left + p] = temp[p];
+	}
 /* ***************************** [^] PUBLIC [^] ***************************** */
 private: /* ************************ [v] PRIVATE [v] ************************ */
-	T		*_array;
-	size_t	_size;
+	vector<int> _vector;
+	deque<int>	_deque;
 /* **************************** [^] PRIVATE [^] ***************************** */
 };
 
-/* *************************** [v] PROTOTYPES [v] *************************** */
-template<typename T>
-ostream	&operator << (ostream &out, Array <T> &arr);
-/* *************************** [^] PROTOTYPES [^] *************************** */
-
-#include "Array.tpp"
-
-#endif /* ARRAY_HPP */
+#endif /* PMERGEME_H */

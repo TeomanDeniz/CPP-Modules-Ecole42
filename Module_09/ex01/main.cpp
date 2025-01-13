@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iter.hpp                                           :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdeniz <Discord:@teomandeniz>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,56 +10,40 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ITER_HPP
-#	define ITER_HPP 202402
 
 /* **************************** [v] INCLUDES [v] **************************** */
+#include "RPN.hpp" /*
+#   void RPN_calculator(string);
+#        */
 #include <iostream> /*
 #nmspace std;
 #        */
 /* **************************** [^] INCLUDES [^] **************************** */
 
 /* ***************************** [v] USINGS [v] ***************************** */
+using std::exception;
 using std::cout;
 using std::endl;
 /* ***************************** [^] USINGS [^] ***************************** */
 
-template <typename T>
-void
-	swap(T &a, T &b)
+int
+	main(int argc, char **argv)
 {
-	T	temp;
+	if (argc != 2)
+	{
+		cout << "Error: No inverted Polish mathematical expression provided.";
+		cout << endl;
+		return (1);
+	}
 
-	temp = a;
-	a = b;
-	b = temp;
+	try
+	{
+		RPN_calculator(argv[1]);
+	}
+	catch (const exception &e)
+	{
+		cout << e.what() << endl;
+	}
+
+	return (0);
 }
-
-template <typename T>
-void
-	iter(T *array, int size, void (*f)(T &))
-{
-	int	i;
-
-	for (i = 0; i < size; i++)
-		f(array[i]);
-}
-
-template <typename T>
-void
-	iter(T *array, int size, void (*f)(const T &))
-{
-	int	i;
-
-	for (i = 0; i < size; i++)
-		f(array[i]);
-}
-
-template <typename T>
-void
-	print(T &s)
-{
-	cout << "{" << &s << "} ~> " << "[" << s << "]" << endl;
-}
-
-#endif /* ITER_HPP */

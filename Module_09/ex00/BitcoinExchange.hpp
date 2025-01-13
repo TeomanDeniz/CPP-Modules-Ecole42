@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Array.hpp                                          :+:      :+:    :+:   */
+/*   BitcoinExchange.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdeniz <Discord:@teomandeniz>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,50 +10,46 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ARRAY_HPP
-#	define ARRAY_HPP 202402
+#ifndef BITCOINEXCHANGE_HPP
+#	define BITCOINEXCHANGE_HPP 202402
 
 /* **************************** [v] INCLUDES [v] **************************** */
 #	include <iostream> /*
 #	nmspace std;
 #	        */
-#	include <cstddef> /*
-#	nmspace size_t;
+#	include <string> /*
+#	  class std::string;
+#	        */
+#	include <map> /*
+#	   T <> std::map;
 #	        */
 /* **************************** [^] INCLUDES [^] **************************** */
 
 /* ***************************** [v] USINGS [v] ***************************** */
-using std::ostream;
-using std::exception;
+using std::string;
+using std::map;
 /* ***************************** [^] USINGS [^] ***************************** */
 
-template <typename T>
-class Array
+class BitcoinExchange
 {
 public: /* ************************* [v] PUBLIC [v] ************************* */
-	Array(void);
-	Array(unsigned int n);
-	Array(const Array &copy);
-	~Array(void);
-	Array			&operator = (const Array &other);
-	T				&operator [] (const unsigned int index);
-	const size_t	&size(void) const;
-	class OutOfBoundsException : public exception
-	{
-		virtual const char *what() const throw();
-	};
+	BitcoinExchange(void);
+	BitcoinExchange(const BitcoinExchange &copy);
+	BitcoinExchange	&operator=(const BitcoinExchange &other);
+	~BitcoinExchange(void);
+	void	readData(void);
+	void	readInput(const string file);
+	void	checkFileFormat(const string &format);
+	string	trim(const string &str);
+	bool	checkInputFormat(const string &key, const string &value);
+	bool	checkDataSpecialFormat(int year, int month, int day);
+	bool	is_stod(const string &str);
+	double	my_stod(const string &str);
+	double	findRate(string date, map<string, double> data, double value);
 /* ***************************** [^] PUBLIC [^] ***************************** */
 private: /* ************************ [v] PRIVATE [v] ************************ */
-	T		*_array;
-	size_t	_size;
+	map<string, double> _data;
 /* **************************** [^] PRIVATE [^] ***************************** */
 };
 
-/* *************************** [v] PROTOTYPES [v] *************************** */
-template<typename T>
-ostream	&operator << (ostream &out, Array <T> &arr);
-/* *************************** [^] PROTOTYPES [^] *************************** */
-
-#include "Array.tpp"
-
-#endif /* ARRAY_HPP */
+#endif /* BITCOINEXCHANGE_HPP */

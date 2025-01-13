@@ -31,12 +31,11 @@ using std::deque;
 /* ***************************** [^] USINGS [^] ***************************** */
 
 template < typename T, typename C = deque <T> >
-
 class MutantStack : public stack <T, C>
 {
 public: /* ************************* [v] PUBLIC [v] ************************* */
 	typedef typename \
-		stack <T, C>::container_type::iterator					\
+							\
 		iterator;
 	typedef typename \
 		stack <T, C>::container_type::const_iterator			\

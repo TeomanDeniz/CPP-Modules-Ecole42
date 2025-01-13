@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iter.hpp                                           :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hdeniz <Discord:@teomandeniz>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,56 +10,39 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ITER_HPP
-#	define ITER_HPP 202402
-
 /* **************************** [v] INCLUDES [v] **************************** */
+#include "BitcoinExchange.hpp" /*
+#  class BitcoinExchange;
+#        */
 #include <iostream> /*
 #nmspace std;
 #        */
 /* **************************** [^] INCLUDES [^] **************************** */
 
 /* ***************************** [v] USINGS [v] ***************************** */
+using std::exception;
 using std::cout;
 using std::endl;
 /* ***************************** [^] USINGS [^] ***************************** */
 
-template <typename T>
-void
-	swap(T &a, T &b)
+int
+	main(int argc, char **argv)
 {
-	T	temp;
+	if (argc != 2)
+	{
+		cout << "Error: more or less argument" << endl;
+		return (1);
+	}
 
-	temp = a;
-	a = b;
-	b = temp;
+	try
+	{
+		BitcoinExchange btc;
+		btc.readInput(argv[1]);
+	}
+	catch (const exception &e)
+	{
+		cout << e.what() << endl;
+	}
+
+	return (0);
 }
-
-template <typename T>
-void
-	iter(T *array, int size, void (*f)(T &))
-{
-	int	i;
-
-	for (i = 0; i < size; i++)
-		f(array[i]);
-}
-
-template <typename T>
-void
-	iter(T *array, int size, void (*f)(const T &))
-{
-	int	i;
-
-	for (i = 0; i < size; i++)
-		f(array[i]);
-}
-
-template <typename T>
-void
-	print(T &s)
-{
-	cout << "{" << &s << "} ~> " << "[" << s << "]" << endl;
-}
-
-#endif /* ITER_HPP */
