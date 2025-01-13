@@ -39,9 +39,9 @@ int
 		BitcoinExchange btc;
 		btc.readInput(argv[1]);
 	}
-	catch (const exception &e)
+	catch (const exception &error)
 	{
-		cout << e.what() << endl;
+		cout << error.what() << endl;
 	}
 
 	return (0);
