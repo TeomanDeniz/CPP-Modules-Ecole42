@@ -60,6 +60,8 @@ public: /* ************************* [v] PUBLIC [v] ************************* */
 	{
 		int				p;
 		int				i;
+		int				j;
+		int				k;
 		vector <int>	temp(right - left + 1);
 
 		i = left, j = mid + 1, k = 0;

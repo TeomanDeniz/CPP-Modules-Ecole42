@@ -31,6 +31,9 @@
 #typedef clock_t;
 #clock_t clock (void);
 #        */
+#include <iomanip> /*
+#   T <> setprecision(int);
+#        */
 /* **************************** [^] INCLUDES [^] **************************** */
 
 /* ***************************** [v] USINGS [v] ***************************** */
@@ -143,9 +146,9 @@ void
 void
 	PmergeMe::sort(char **arr)
 {
-	clock_t	start
+	clock_t	start;
 	clock_t	end;
-	double	Vtime
+	double	Vtime;
 	double	Dtime;
 	int		i;
 	int		nb;

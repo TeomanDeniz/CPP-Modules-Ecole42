@@ -77,7 +77,7 @@ static void
 	if (numSize(arg) + operatorSize(arg) < 2)
 		throw std::runtime_error("Error");
 
-	for (i = 0; i < arg.length(); i++)
+	for (i = 0; i < (int)arg.length(); i++)
 	{
 		if (isalnum(arg.c_str()[i]) && !!arg.c_str()[i + 1] && \
 			!isspace(arg.c_str()[i + 1]))

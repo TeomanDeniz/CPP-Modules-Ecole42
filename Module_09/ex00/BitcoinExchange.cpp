@@ -76,7 +76,7 @@ void
 	while (getline(dataFile, line))
 	{
 		pos = line.find(",");
-		if (pos == string::npos)
+		if (pos == (int)string::npos)
 			throw std::runtime_error("Invalid data format");
 		key = line.substr(0, pos);
 		value = line.substr(pos + 1);
@@ -87,9 +87,9 @@ void
 }
 
 void
-	BitcoinExchange::readInput(const string file)
+	BitcoinExchange::readInput(const string &file)
 {
-	ifstream	inputFile(file);
+	ifstream	inputFile(file.c_str());
 	string		line;
 	string		key;
 	string		value;
@@ -105,7 +105,7 @@ void
 	{
 		pos = line.find("|");
 
-		if (pos == string::npos)
+		if (pos == (int)string::npos)
 		{
 			cout << "Error: bad input => " << line << endl;
 			continue ;
@@ -153,7 +153,7 @@ string
 	first = str.find_first_not_of(" \t\n\r");
 	last = str.find_last_not_of(" \t\n\r");
 
-	if (first == string::npos || last == string::npos)
+	if (first == (int)string::npos || last == (int)string::npos)
 		return "";
 
 	return (str.substr(first, last - first + 1));

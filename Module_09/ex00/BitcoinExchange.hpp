@@ -38,12 +38,12 @@ public: /* ************************* [v] PUBLIC [v] ************************* */
 	BitcoinExchange	&operator=(const BitcoinExchange &other);
 	~BitcoinExchange(void);
 	void	readData(void);
-	void	readInput(const string file);
+	void	readInput(const string &file);
 	void	checkFileFormat(const string &format);
 	string	trim(const string &str);
-	bool	checkInputFormat(const string &key, const string &value);
-	bool	checkDataSpecialFormat(int year, int month, int day);
-	bool	is_stod(const string &str);
+	int		checkInputFormat(const string &key, const string &value);
+	int		checkDataSpecialFormat(int year, int month, int day);
+	int		is_stod(const string &str);
 	double	my_stod(const string &str);
 	double	findRate(string date, map<string, double> data, double value);
 /* ***************************** [^] PUBLIC [^] ***************************** */
