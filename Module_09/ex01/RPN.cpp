@@ -14,11 +14,17 @@
 #include <iostream> /*
 #nmspace std;
 #        */
-#include <sstream> /*
-#   T <> stringstream;
-#        */
 #include <stack> /*
 #  class std::stack;
+#        */
+#include "RPN.hpp" /*
+#  class RPN;
+#        */
+#include <sstream> /*
+#  class std::istringstream;
+#        */
+#include <cstdlib> /*
+#    int std::atoi(char *);
 #        */
 /* **************************** [^] INCLUDES [^] **************************** */
 
@@ -26,126 +32,98 @@
 using std::string;
 using std::cout;
 using std::endl;
-using std::stringstream;
 using std::stack;
 /* ***************************** [^] USINGS [^] ***************************** */
 
-static int
-	numSize(string arg)
+/* ************************** [v] CONSTRUCTOR [v] *************************** */
+RPN::RPN() {}
+
+RPN::RPN(const RPN &other)
 {
-	int	size;
-	int	i;
-
-	size = 0;
-
-	for (i = 0; arg[i]; i++)
-		if ('0' <= arg[i] && arg[i] <= '9')
-			++size;
-
-	return (size);
+	*this = other;
 }
+/* ************************** [^] CONSTRUCTOR [^] *************************** */
 
-static int
-	operatorSize(string arg)
+/* *************************** [v] DESTRUCTOR [v] *************************** */
+RPN::~RPN() {}
+/* *************************** [^] DESTRUCTOR [^] *************************** */
+
+/* **************************** [v] OPERATOR [v] **************************** */
+RPN
+	&RPN::operator = (const RPN &other)
 {
-	int	size;
-	int	i;
+	if (this != &other)
+		this->_stack = other._stack;
 
-	size = 0;
-
-	for (i = 0; arg[i]; i++)
-		if (arg[i] == '+' || arg[i] == '-' || arg[i] == '*' || arg[i] == '/')
-			++size;
-
-	return (size);
+	return (*this);
 }
+/* **************************** [^] OPERATOR [^] **************************** */
 
-static void
-	check_RPN_format(string arg)
+int
+	RPN::checkInput(string str)
 {
-	int	i;
+	int		i;
+	string	operators = "+-*/";
 
-	if (arg.length() == 0)
-		throw std::runtime_error("Error");
-
-	if (arg.find_first_not_of("0123456789-+*/ \r\n\t") != string::npos)
-		throw std::runtime_error("Error");
-
-	if (numSize(arg) - operatorSize(arg) != 1)
-		throw std::runtime_error("Error");
-
-	if (numSize(arg) + operatorSize(arg) < 2)
-		throw std::runtime_error("Error");
-
-	for (i = 0; i < (int)arg.length(); i++)
+	for (i = 0; i < (int)str.length(); i++)
 	{
-		if (
-			isalnum(arg.c_str()[i]) && !!arg.c_str()[i + 1] &&
-			!isspace(arg.c_str()[i + 1])
-		)
-			throw std::runtime_error("Error");
-		else if (!isalnum(arg.c_str()[i]) && !isspace(arg.c_str()[i])
-			&& !!arg.c_str()[i + 1] && !isspace(arg.c_str()[i + 1]))
-			throw std::runtime_error("Error");
+		if (str[i] == ' ')
+			continue ;
+
+		if (isdigit(str[i]) == 0 && operators.find(str[i]) == std::string::npos)
+			return (0);
 	}
-}
 
-static int
-	my_stoi(const string &str)
-{
-	std::istringstream	iss(str);
-	int					result;
-
-	if (!(iss >> result))
-		throw std::invalid_argument("Invalid argument");
-
-	return (result);
+	return (1);
 }
 
 void
-	RPN_calculator(string arg)
+	RPN::calculate(std::string str)
 {
-	check_RPN_format(arg);
+	stack<int>			stack;
+	const string		operators = "+-*/";
+	std::istringstream	iss(str);
+	string				token;
 
-	stack<int> numbers;
-	stringstream ss(arg);
-	string token;
-
-	while (ss >> token)
+	if (!checkInput(str))
+		throw std::runtime_error("Invalid RPN expression");
+	while (iss >> token)
 	{
-		if (token == "+" || token == "-" || token == "*" || token == "/")
+		if (token.size() == 1 && operators.find(token) != std::string::npos)
 		{
-			if (numbers.size() < 2)
-				throw std::invalid_argument("Error");
+			if (stack.size() < 2)
+				throw std::runtime_error("Invalid RPN expression");
 
-			const int n1 = numbers.top();
-			numbers.pop();
-			const int n2 = numbers.top();
-			numbers.pop();
-
-			int result;
+			int b = stack.top();
+			stack.pop();
+			int a = stack.top();
+			stack.pop();
 
 			if (token == "+")
-				result = n1 + n2;
+				stack.push(a + b);
 			else if (token == "-")
-				result = n1 - n2;
+				stack.push(a - b);
 			else if (token == "*")
-				result = n1 * n2;
+				stack.push(a * b);
 			else if (token == "/")
 			{
-				if (n2 == 0)
-					throw std::runtime_error("Error");
-				result = n1 / n2;
+				if (b == 0)
+					throw std::runtime_error("Division by zero");
+				stack.push(a / b);
 			}
-
-			numbers.push(result);
+		}
+		else if (isdigit(token[0]) || (token.size() > 1 && isdigit(token[1])))
+		{
+			stack.push(std::atoi(token.c_str()));
 		}
 		else
 		{
-			int num = my_stoi(token);
-			numbers.push(num);
+			throw std::runtime_error("Invalid token in RPN expression");
 		}
 	}
 
-	cout << numbers.top() << endl;
+	if (stack.size() != 1)
+		throw std::runtime_error("Invalid RPN expression");
+
+	std::cout << "Result: " << stack.top() << std::endl;
 }

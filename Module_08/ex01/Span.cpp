@@ -37,6 +37,7 @@ using std::vector;
 using std::srand;
 /* ***************************** [^] USINGS [^] ***************************** */
 
+/* ************************** [v] CONSTRUCTOR [v] *************************** */
 Span::Span(void)
 {
 	cout << "Default constructor called (Span)" << endl;
@@ -56,14 +57,18 @@ Span::Span(const Span &copy)
 	cout << "Copy constructor called (Span)" << endl;
 	*this = copy;
 }
+/* ************************** [^] CONSTRUCTOR [^] *************************** */
 
+/* *************************** [v] DESTRUCTOR [v] *************************** */
 Span::~Span(void)
 {
 	cout << "Destructor called (Span)" << endl;
 }
+/* *************************** [^] DESTRUCTOR [^] *************************** */
 
+/* **************************** [v] OPERATOR [v] **************************** */
 Span
-	&Span::operator = (const Span &other)
+	&Span::operator = (const Span &other) /* OPERATOR "=" */
 {
 	cout << "Copy assignment operator called (Span)" << endl;
 
@@ -76,6 +81,7 @@ Span
 
 	return (*this);
 }
+/* **************************** [^] OPERATOR [^] **************************** */
 
 void
 	Span::increment(void)

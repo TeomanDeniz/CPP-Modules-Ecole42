@@ -38,6 +38,7 @@ using std::getline;
 using std::ifstream;
 /* ***************************** [^] USINGS [^] ***************************** */
 
+/* ************************** [v] CONSTRUCTOR [v] *************************** */
 BitcoinExchange::BitcoinExchange(void)
 {
 	readData();
@@ -47,17 +48,22 @@ BitcoinExchange::BitcoinExchange(const BitcoinExchange &copy)
 {
 	*this = copy;
 }
+/* ************************** [^] CONSTRUCTOR [^] *************************** */
 
+/* *************************** [v] DESTRUCTOR [v] *************************** */
 BitcoinExchange::~BitcoinExchange(void){}
+/* *************************** [^] DESTRUCTOR [^] *************************** */
 
+/* **************************** [v] OPERATOR [v] **************************** */
 BitcoinExchange
 	&BitcoinExchange::operator = (const BitcoinExchange &other)
-{
+{ /* OPERATOR "=" */
 	if (this != &other)
 		this->_data = other._data;
 
 	return (*this);
 }
+/* **************************** [^] OPERATOR [^] **************************** */
 
 void
 	BitcoinExchange::readData(void)

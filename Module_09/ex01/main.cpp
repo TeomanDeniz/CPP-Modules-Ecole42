@@ -13,7 +13,7 @@
 
 /* **************************** [v] INCLUDES [v] **************************** */
 #include "RPN.hpp" /*
-#   void RPN_calculator(string);
+#  class RPN;
 #        */
 #include <iostream> /*
 #nmspace std;
@@ -38,7 +38,7 @@ int
 
 	try
 	{
-		RPN_calculator(argv[1]);
+		RPN().calculate(argv[1]);
 	}
 	catch (const exception &e)
 	{

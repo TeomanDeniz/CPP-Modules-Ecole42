@@ -14,15 +14,32 @@
 #	define RPN_HPP 202402
 
 /* **************************** [v] INCLUDES [v] **************************** */
-#include <iostream> /*
-#nmspace std;
-#        */
+#	include <iostream> /*
+#	nmspace std;
+#	        */
+#	include <stack> /*
+#	  class std::stack;
+#	        */
 /* **************************** [^] INCLUDES [^] **************************** */
 
 /* ***************************** [v] USINGS [v] ***************************** */
+using std::stack;
 using std::string;
 /* ***************************** [^] USINGS [^] ***************************** */
 
-extern void	RPN_calculator(string arg);
+class RPN
+{
+public: /* ************************* [v] PUBLIC [v] ************************* */
+	RPN();
+	RPN(const RPN &other);
+	~RPN();
+	RPN		&operator = (const RPN &other);
+	void	calculate(string str);
+/* ***************************** [^] PUBLIC [^] ***************************** */
+private: /* ************************ [v] PRIVATE [v] ************************ */
+	stack<int>	_stack;
+	int			checkInput(string str);
+/* **************************** [^] PRIVATE [^] ***************************** */
+};
 
 #endif /* RPN_HPP */
