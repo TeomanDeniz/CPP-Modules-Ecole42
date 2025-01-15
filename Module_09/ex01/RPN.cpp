@@ -79,10 +79,12 @@ static void
 
 	for (i = 0; i < (int)arg.length(); i++)
 	{
-		if (isalnum(arg.c_str()[i]) && !!arg.c_str()[i + 1] && \
-			!isspace(arg.c_str()[i + 1]))
+		if (
+			isalnum(arg.c_str()[i]) && !!arg.c_str()[i + 1] &&
+			!isspace(arg.c_str()[i + 1])
+		)
 			throw std::runtime_error("Error");
-		else if (!isalnum(arg.c_str()[i]) && !isspace(arg.c_str()[i]) \
+		else if (!isalnum(arg.c_str()[i]) && !isspace(arg.c_str()[i])
 			&& !!arg.c_str()[i + 1] && !isspace(arg.c_str()[i + 1]))
 			throw std::runtime_error("Error");
 	}
@@ -105,25 +107,23 @@ void
 {
 	check_RPN_format(arg);
 
-	stack <int>		numbers;
-	stringstream	ss(arg);
-	string			token;
+	stack<int> numbers;
+	stringstream ss(arg);
+	string token;
 
 	while (ss >> token)
 	{
 		if (token == "+" || token == "-" || token == "*" || token == "/")
 		{
-			int	n1;
-			int	n2;
-			int	result;
-
 			if (numbers.size() < 2)
 				throw std::invalid_argument("Error");
 
-			n1 = numbers.top();
+			const int n1 = numbers.top();
 			numbers.pop();
-			n2 = numbers.top();
+			const int n2 = numbers.top();
 			numbers.pop();
+
+			int result;
 
 			if (token == "+")
 				result = n1 + n2;
@@ -135,7 +135,6 @@ void
 			{
 				if (n2 == 0)
 					throw std::runtime_error("Error");
-
 				result = n1 / n2;
 			}
 
