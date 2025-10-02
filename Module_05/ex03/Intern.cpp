@@ -14,6 +14,7 @@
 #include "Intern.hpp" /*
 #  class AForm;
 #  class Intern;
+# struct FormMapping;
 #        */
 #include <iostream> /*
 #nmspace std;
@@ -80,31 +81,55 @@ AForm
 	return (new PresidentialPardonForm(target));
 }
 
-AForm
-	*Intern::makeForm(const string formName, const string target)
+static AForm
+	*makeFormTrue(Intern *__this__, unsigned char &index, const string &target)
 {
-	int		index;
-	AForm	*(Intern::*formArray[3])(const string target) =
+	const FormMapping	mappings[5] =
 	{
-		&Intern::_makeShrubberyCreationForm,
-		&Intern::_makeRobotomyRequestForm,
-		&Intern::_makePresidentialPardonForm
-	};
-	string	formNames[3] = {
-		"shrubbery creation",
-		"robotomy request",
-		"presidential pardon"
+		{0},
+		{"shrubbery creation", &Intern::createShrubberyCreation},
+		{"robotomy request", &Intern::createRobotomyRequest},
+		{0},
+		{"presidential pardon", &Intern::createPresidentialPardon}
 	};
 
-	for (index = 0; index < 3; index++)
-	{
-		if (formName == formNames[index])
-		{
-			cout << "Intern creates " << formName << endl;
-			return ((this->*(formArray[index]))(target));
-		}
-	}
+	return ((__this__->*mappings[index].creator)(target));
+}
 
-	cout << "Intern could not create " << formName << endl;
+static AForm
+	*makeFormFalse(
+	Intern *__this__,
+	unsigned char &index,
+	const string &target
+)
+{
+	(void)__this__;
+	(void)index;
+	(void)target;
+
+	throw (Intern::FormNotFoundException());
 	return (0);
+}
+
+AForm
+	*Intern::makeForm(const string &formName, const string &target)
+{
+	unsigned char	index;
+
+	index = 0;
+	AForm *(*check[5])(Intern*, unsigned char &, const string&) = {
+		makeFormFalse,
+		makeFormTrue,
+		makeFormTrue,
+		makeFormTrue,
+		makeFormTrue
+	};
+
+	index = (formName == "presidential pardon");
+	index <<= 1;
+	index += (formName == "robotomy request");
+	index <<= 1;
+	index += (formName == "shrubbery creation");
+
+	return (check[index](this, index, target));
 }

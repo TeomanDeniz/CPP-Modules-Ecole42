@@ -6,12 +6,12 @@
 /*   By: hdeniz <Discord:@teomandeniz>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 18:00:03 by hdeniz            #+#    #+#             */
-/*   Updated: 2024/02/01 18:00:29 by hdeniz           ###   ########.fr       */
+/*   Updated: 2025/10/02 18:00:29 by hdeniz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INTERN_HPP
-#	define INTERN_HPP 202402
+#	define INTERN_HPP 202510
 
 /* **************************** [v] INCLUDES [v] **************************** */
 #	include <iostream> /*
@@ -49,13 +49,19 @@ public: /* ************************* [v] PUBLIC [v] ************************* */
 	Intern(const Intern &copy);
 	~Intern(void);
 	Intern	&operator = (const Intern &other);
-	AForm	*makeForm(const string formName, const string target);
+	AForm	*makeForm(const string &formName, const string &target);
 /* ***************************** [^] PUBLIC [^] ***************************** */
 private: /* ************************ [v] PRIVATE [v] ************************ */
 	AForm	*_makeShrubberyCreationForm(const string target);
 	AForm	*_makeRobotomyRequestForm(const string target);
 	AForm	*_makePresidentialPardonForm(const string target);
 /* **************************** [^] PRIVATE [^] ***************************** */
+};
+
+struct FormMapping
+{
+	const char	*name;
+	AForm		*(Intern::*creator)(const string&);
 };
 
 #endif /* INTERN_HPP */
