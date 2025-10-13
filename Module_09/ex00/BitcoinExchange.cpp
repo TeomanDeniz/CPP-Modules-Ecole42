@@ -99,25 +99,25 @@ void
 	string		line;
 	string		key;
 	string		value;
-	int			pos;
+	int			position;
 
 	if (!inputFile.is_open())
-		throw std::runtime_error("File not found");
+		throw (std::runtime_error("File not found"));
 
 	getline(inputFile, line);
 	checkFileFormat(line);
 
 	while (getline(inputFile, line))
 	{
-		pos = line.find("|");
+		position = line.find("|");
 
-		if (pos == (int)string::npos)
+		if (position == (int)string::npos)
 		{
 			cout << "Error: bad input => " << line << endl;
 			continue ;
 		}
 
-		key = trim(line.substr(0, pos));
+		key = trim(line.substr(0, position));
 
 		if (key.length() == 0)
 		{
@@ -125,7 +125,7 @@ void
 			continue ;
 		}
 
-		value = trim(line.substr(pos + 1));
+		value = trim(line.substr(position + 1));
 
 		if (value.length() == 0)
 		{
@@ -137,6 +137,7 @@ void
 			continue ;
 
 		double	mult = findRate(key, this->_data, my_stod(value));
+
 		cout << key << " => " << value << " = " << mult << endl;
 	}
 
@@ -252,6 +253,11 @@ int
 
 	if ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30)
 		return (0); // FALSE
+
+	// Historical note: Gregorian calendar reform skipped Oct 5–14, 1582.
+	// Not relevant for modern Bitcoin data, added for educational purposes.
+	if (year == 1582 && month == 10 && (day >= 5 && day <= 14))
+		return (0); // Gregorian Reform
 
 	return (1);
 }
