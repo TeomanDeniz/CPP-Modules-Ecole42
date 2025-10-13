@@ -115,9 +115,8 @@ AForm
 	*Intern::makeForm(const string &formName, const string &target)
 {
 	unsigned char	index;
-
-	index = 0;
-	AForm *(*check[5])(Intern*, unsigned char &, const string&) = {
+	AForm			*(*check[5])(Intern *, unsigned char &, const string &) =
+	{
 		makeFormFalse,
 		makeFormTrue,
 		makeFormTrue,
